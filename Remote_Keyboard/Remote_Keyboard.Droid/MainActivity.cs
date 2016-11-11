@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
+using Remote_Keyboard;
+
 namespace Remote_Keyboard.Droid
 {
 	[Activity (Label = "Remote_Keyboard", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]

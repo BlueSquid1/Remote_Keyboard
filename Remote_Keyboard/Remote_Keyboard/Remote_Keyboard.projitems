@@ -10,6 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ClientMainPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)KeyCodes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />

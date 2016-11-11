@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.InteropServices;
 
 using Xamarin.Forms;
 
@@ -9,20 +10,10 @@ namespace Remote_Keyboard
 {
 	public class App : Application
 	{
-		public App ()
+        public App ()
 		{
-			// The root page of your application
-			MainPage = new ContentPage {
-				Content = new StackLayout {
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
+            // The root page of your application
+            MainPage = new SplashScreen();
 		}
 
 		protected override void OnStart ()
