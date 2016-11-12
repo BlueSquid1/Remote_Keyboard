@@ -11,11 +11,14 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Remote_Keyboard", "Remote_K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remote_Keyboard.WindowsForms", "Remote_Keyboard.WindowsForms\Remote_Keyboard.WindowsForms.csproj", "{DE435220-1BE4-4A12-BDA2-FE3F56E7F3CF}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Remote_KeyboardPortable", "Remote_KeyboardPortable\Remote_KeyboardPortable.shproj", "{45D9E29B-D068-4664-856B-2FF17A72C181}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Remote_Keyboard\Remote_Keyboard\Remote_Keyboard.projitems*{39624957-4ec0-4464-a7c1-6be3614839b8}*SharedItemsImports = 4
+		Remote_KeyboardPortable\Remote_KeyboardPortable.projitems*{45d9e29b-d068-4664-856b-2ff17a72c181}*SharedItemsImports = 13
 		Remote_Keyboard\Remote_Keyboard\Remote_Keyboard.projitems*{8f81f55a-bc19-4971-b994-3789ddd26fd4}*SharedItemsImports = 13
-		Remote_Keyboard\Remote_Keyboard\Remote_Keyboard.projitems*{de435220-1be4-4a12-bda2-fe3f56e7f3cf}*SharedItemsImports = 4
+		Remote_KeyboardPortable\Remote_KeyboardPortable.projitems*{de435220-1be4-4a12-bda2-fe3f56e7f3cf}*SharedItemsImports = 4
 		Remote_Keyboard\Remote_Keyboard\Remote_Keyboard.projitems*{f7b5dcf1-8a33-40bb-927e-e4a83760da42}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@ using System.Text;
 
 using System.Runtime.InteropServices;
 
-namespace Remote_Keyboard
+namespace Remote_KeyboardPortable
 {
     /// <summary>
     /// http://msdn.microsoft.com/en-us/library/windows/desktop/ms646270(v=vs.85).aspx

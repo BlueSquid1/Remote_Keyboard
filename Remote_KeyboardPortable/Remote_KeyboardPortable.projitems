@@ -3,14 +3,14 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>8f81f55a-bc19-4971-b994-3789ddd26fd4</SharedGUID>
+    <SharedGUID>45d9e29b-d068-4664-856b-2ff17a72c181</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Remote_Keyboard</Import_RootNamespace>
+    <Import_RootNamespace>Remote_KeyboardPortable</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ClientMainPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SplashScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)KeyCodes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UdpListener.cs" />
   </ItemGroup>
 </Project>

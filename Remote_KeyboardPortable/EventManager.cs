@@ -4,7 +4,7 @@ using System.Text;
 
 using System.Runtime.InteropServices; //for calling win32 API
 
-namespace Remote_Keyboard
+namespace Remote_KeyboardPortable
 {
     public class EventManager
     {
