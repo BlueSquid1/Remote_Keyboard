@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f758ceca-5646-4c8d-b65e-45f4a883af25</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Remote_Keyboard</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BaseStation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)KeyCodes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SplashScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UDPListerner.cs" />
+  </ItemGroup>
+</Project>
