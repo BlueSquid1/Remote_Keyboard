@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if __IOS__ || __ANDROID__
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,3 +33,5 @@ namespace Remote_Keyboard
 		}
 	}
 }
+
+#endif
