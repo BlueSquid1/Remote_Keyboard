@@ -54,7 +54,7 @@ namespace Remote_Keyboard
         private void SendEvent(object sender, EventArgs e)
         {
             BaseStation baseStation = BaseStation.GetInstance(10000);
-            baseStation.BroadcastSendAsync("from android");
+            baseStation.BroadcastSendAsync("from mobile");
         }
 
         private void Initalize()
