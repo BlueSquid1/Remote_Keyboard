@@ -14,8 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)KeyCodes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SplashScreen.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />
+    <Compile Include="$(MSBuildThisFileDirectory)UdpListener.cs" />
   </ItemGroup>
 </Project>
