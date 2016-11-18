@@ -34,5 +34,11 @@ namespace Remote_Keyboard.WindowsForms
             BaseStation baseStation = BaseStation.GetInstance(10000);
             baseStation.StartingListeningAsync();
         }
+
+        private void testKey_Click(object sender, EventArgs e)
+        {
+            //EventManager x = new EventManager();
+            EventManager.SendKeyPress(VirtualKeyShort.KEY_8, false);
+        }
     }
 }

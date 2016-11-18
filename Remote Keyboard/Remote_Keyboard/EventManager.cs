@@ -12,6 +12,15 @@ namespace Remote_Keyboard
         [DllImport("user32.dll", SetLastError = true)]
         private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
 
+        [DllImport("user32.dll")]
+        static extern uint MapVirtualKey(uint uCode, uint uMapType);
+
+
+        public static uint ScancodeFromVirtualKey(VirtualKeyShort virtualKeyCode)
+        {
+            uint scanCode = MapVirtualKey((uint)virtualKeyCode, 0);
+            return scanCode;
+        }
 
         public static void SendKeyPress(VirtualKeyShort keyCode, bool isDown)
         {
