@@ -22,17 +22,25 @@ namespace Remote_Keyboard
     {
         private string welcomeMessage = "Welcome Developer";
 
+        private StackLayout stackLayout;
+
         //Constructor
         public SplashScreen()
         {
-            Initalize();
-
-            StackLayout stackLayout = new StackLayout
+            this.stackLayout = new StackLayout
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 Orientation = StackOrientation.Vertical,
                 Spacing = 15,
             };
+
+            this.CreateMenu();
+
+            base.Content = this.stackLayout;
+        }
+
+        private void CreateMenu()
+        {
             Label title = new Label
             {
                 Text = welcomeMessage
@@ -46,8 +54,12 @@ namespace Remote_Keyboard
             send.Clicked += SendEvent;
             stackLayout.Children.Add(send);
 
-
-            base.Content = stackLayout;
+            Button test = new Button
+            {
+                Text = "test"
+            };
+            test.Clicked += TestEvent;
+            stackLayout.Children.Add(test);
         }
 
 
@@ -57,9 +69,10 @@ namespace Remote_Keyboard
             baseStation.BroadcastSendAsync("from mobile");
         }
 
-        private void Initalize()
-{
-}
+        private void TestEvent(object sender, EventArgs e)
+        {
+            ((Button)sender).Text = "Test Button pressed";
+        }
     }
 }
 #endif

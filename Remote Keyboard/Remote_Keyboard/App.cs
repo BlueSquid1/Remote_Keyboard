@@ -13,9 +13,8 @@ namespace Remote_Keyboard
 	{
         public App ()
 		{
-            // The root page of your application
             MainPage = new SplashScreen();
-		}
+        }
 
 		protected override void OnStart ()
 		{

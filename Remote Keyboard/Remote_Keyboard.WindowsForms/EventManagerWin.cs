@@ -1,27 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Remote_Keyboard
+
+using System.Runtime.InteropServices; //for calling win32 API
+
+namespace Remote_Keyboard.WindowsForms
 {
-    public class EventManager
+    class EventManagerWin : EventManager
     {
-        /*
-        //declare win32 function call
-        [DllImport("user32.dll", SetLastError = true)]
+        //declare win32 function calls
+        [DllImport("user32.dll")]
         private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
 
         [DllImport("user32.dll")]
-        static extern uint MapVirtualKey(uint uCode, uint uMapType);
+        private static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
 
-        public static uint ScancodeFromVirtualKey(VirtualKeyShort virtualKeyCode)
+        private uint ScancodeFromVirtualKey(VirtualKeyShort virtualKeyCode)
         {
             uint scanCode = MapVirtualKey((uint)virtualKeyCode, 0);
             return scanCode;
         }
 
-        public static void SendKeyPress(VirtualKeyShort keyCode, bool isDown)
+        public void SendKeyPress(VirtualKeyShort keyCode, bool isDown)
         {
             INPUT input = new INPUT();
 
@@ -38,6 +42,5 @@ namespace Remote_Keyboard
                 throw new Exception();
             }
         }
-        */
     }
 }
