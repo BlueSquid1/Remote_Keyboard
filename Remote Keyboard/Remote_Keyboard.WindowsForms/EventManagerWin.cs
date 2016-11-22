@@ -25,13 +25,22 @@ namespace Remote_Keyboard.WindowsForms
             return scanCode;
         }
 
-        public void SendKeyPress(VirtualKeyShort keyCode, bool isDown)
+        public void SendKeyPress(SDLK scanCode, bool isPressed)
         {
+
+            //Console.WriteLine( "scan code = " + scanCode );
+
+            //convert to virtual key
+            VirtualKeyShort x = (VirtualKeyShort)VirtualKeyFromScanCode(scanCode);
+
+
+
+            /*
             INPUT input = new INPUT();
 
             input.type = 1; //keyboard
 
-            input.U.ki.wVk = keyCode;
+            input.U.ki.wVk = virutalKey;
 
             INPUT[] inputArray = new INPUT[] { input };
             uint inputLen = (uint)inputArray.Length;
@@ -41,6 +50,17 @@ namespace Remote_Keyboard.WindowsForms
             {
                 throw new Exception();
             }
+            */
+        }
+
+        public uint VirtualKeyFromScanCode(SDLK scanCode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SDLK ScanCodeFromVirtualKey(uint virtualKeyCode)
+        {
+            throw new NotImplementedException();
         }
     }
 }

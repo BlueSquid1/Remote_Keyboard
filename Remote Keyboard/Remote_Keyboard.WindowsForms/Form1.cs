@@ -38,8 +38,7 @@ namespace Remote_Keyboard.WindowsForms
         private void testKey_Click(object sender, EventArgs e)
         {
             EventManagerWin x = new EventManagerWin();
-            Console.WriteLine(x.Test2());
-            //EventManager.SendKeyPress(VirtualKeyShort.KEY_8, false);
+            x.SendKeyPress(SDLK.c, false);
         }
     }
 }

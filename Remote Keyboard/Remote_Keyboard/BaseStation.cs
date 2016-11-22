@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !WINDOWS_UWP
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets; //for UdpClient
@@ -9,6 +11,7 @@ namespace Remote_Keyboard
 {
     //singleton class
     //one BaseStation is used to send and retrieve data
+    //singleton
     class BaseStation
     {
         private static BaseStation instance = null;
@@ -64,3 +67,5 @@ namespace Remote_Keyboard
         }
     }
 }
+
+#endif

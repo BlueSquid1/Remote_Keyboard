@@ -736,7 +736,7 @@ namespace Remote_Keyboard
     {
         UNKNOWN = 0,
         RETURN = '\r',
-        ESCAPE = '\033',
+        //ESCAPE = '\033',
         BACKSPACE = '\b',
         TAB = '\t',
         SPACE = ' ',
@@ -1259,5 +1259,6 @@ namespace Remote_Keyboard
     SDLK_SLEEP = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SLEEP)
 
      */
+    }
 
 }

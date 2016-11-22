@@ -15,8 +15,24 @@ namespace Remote_Keyboard.Droid
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+            /*
+            this.SetContentView(Resource.Layout.Main);
 
-			global::Xamarin.Forms.Forms.Init (this, bundle);
+            var editText = FindViewById<EditText>(Resource.Id.editText);
+            TextView textView = FindViewById<TextView>(Resource.Id.textView);
+
+            editText.KeyPress += (object sender, View.KeyEventArgs e) =>
+            {
+                textView.Text += '1'; // e.KeyCode.ToString();
+            };
+
+            editText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
+            {
+                textView.Text += '1'; // e.KeyCode.ToString();
+            };
+            */
+
+            global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new Remote_Keyboard.App ());
 		}
 	}
