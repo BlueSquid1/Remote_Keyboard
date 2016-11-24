@@ -28,8 +28,8 @@ namespace Remote_Keyboard.Droid
 
 
             EditText editText = FindViewById<EditText>(Resource.Id.editText);
-            TextView textView = FindViewById<TextView>(Resource.Id.textView);
-            Button ButtonView = FindViewById<Button>(Resource.Id.button1);
+            //TextView textView = FindViewById<TextView>(Resource.Id.textView);
+            //Button ButtonView = FindViewById<Button>(Resource.Id.button1);
 
             //KeypadHandler keypadHandler = new KeypadHandler();
 
@@ -37,22 +37,30 @@ namespace Remote_Keyboard.Droid
             //editText.KeyListener = temp;
             //editText.SetOnKeyListener();
 
+            /*
             var dialog = new AlertDialog.Builder(this)
                                     .SetTitle("Delete entry")
                                     .SetMessage("Are you sure you want to delete this entry?")
                                      .Show();
-
-            IDialogInterfaceOnKeyListener x = (IDialogInterfaceOnKeyListener)new KeyListener();
-            dialog.SetOnKeyListener(x);
+            */
+            View.IOnKeyListener x = (View.IOnKeyListener)new KeyListener();
+            layout.SetOnKeyListener(x);
 
         }
     }
 
-    public class KeyListener : Activity, IDialogInterfaceOnKeyListener
+    public class KeyListener : Activity, View.IOnKeyListener
     {
+        public bool OnKey(View v, [GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            //throw new NotImplementedException();
+            return false;
+        }
+
         public bool OnKey(IDialogInterface dialog, [GeneratedEnum] Keycode keyCode, KeyEvent e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return false;
         }
     }
 }
