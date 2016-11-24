@@ -61,10 +61,16 @@ namespace Remote_Keyboard.Droid
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int editText = 2131034112;
+			public const int background = 2131034112;
+			
+			// aapt resource value: 0x7f050003
+			public const int button1 = 2131034115;
 			
 			// aapt resource value: 0x7f050001
-			public const int textView = 2131034113;
+			public const int editText = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int textView = 2131034114;
 			
 			static Id()
 			{

@@ -1,45 +1,60 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.Runtime;
+using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
+using System;
+using Android.Runtime;
 
 namespace Remote_Keyboard.Droid
 {
-	[Activity (Label = "Remote_Keyboard.Droid", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity
-	{
-        //entry point
-		protected override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
+    [Activity(Label = "Remote_Keyboard.Droid", MainLauncher = true, Icon = "@drawable/icon")]
+    public class MainActivity : Activity
+    {
+        //private AlertDialog dialog;
 
-			// Set our view from the "main" layout resource
-			SetContentView (Resource.Layout.Main);
+        public static TextView textView;
+
+
+        //entry point
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+
+            // Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.Main);
+
+            RelativeLayout layout = (RelativeLayout)FindViewById(Resource.Id.background);
+
 
             EditText editText = FindViewById<EditText>(Resource.Id.editText);
             TextView textView = FindViewById<TextView>(Resource.Id.textView);
+            Button ButtonView = FindViewById<Button>(Resource.Id.button1);
 
-            editText.KeyPress += (object sender, View.KeyEventArgs e) =>
-            {
-                //KeyPress();
-                textView.Text += e.KeyCode.ToString(); // e.KeyCode.ToString();
-            };
+            //KeypadHandler keypadHandler = new KeypadHandler();
 
-            editText.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) =>
-            {
-                textView.Text = e.Text.ToString(); // e.KeyCode.ToString();
-            };
+
+            //editText.KeyListener = temp;
+            //editText.SetOnKeyListener();
+
+            var dialog = new AlertDialog.Builder(this)
+                                    .SetTitle("Delete entry")
+                                    .SetMessage("Are you sure you want to delete this entry?")
+                                     .Show();
+
+            IDialogInterfaceOnKeyListener x = (IDialogInterfaceOnKeyListener)new KeyListener();
+            dialog.SetOnKeyListener(x);
+
         }
+    }
 
-        private void KeyPress()
+    public class KeyListener : Activity, IDialogInterfaceOnKeyListener
+    {
+        public bool OnKey(IDialogInterface dialog, [GeneratedEnum] Keycode keyCode, KeyEvent e)
         {
-
+            throw new NotImplementedException();
         }
-	}
+    }
 }
 
 
