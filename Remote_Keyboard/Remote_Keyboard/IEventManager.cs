@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Remote_Keyboard
 {
-    public interface EventManager
+    public interface IEventManager
     {
-        void SendKeyPress(ushort scanCode, bool isPressed);
+        void TriggerKeyPress(ushort scanCode, bool isPressed);
 
         ushort ScanCodeFromVirtualKey(ushort virtualKeyCode);
 

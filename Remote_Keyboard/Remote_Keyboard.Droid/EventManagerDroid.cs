@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Remote_Keyboard.Droid
 {
-    class EventManagerDroid : EventManager
+    class EventManagerDroid : IEventManager
     {
         //Hashtable qtKeyToNativeKey = new Hashtable();
         //Hashtable nativeKeyToQtKey = new Hashtable();
@@ -23,7 +23,7 @@ namespace Remote_Keyboard.Droid
             throw new NotImplementedException();
         }
 
-        public void SendKeyPress(ushort scanCode, bool isPressed)
+        public void TriggerKeyPress(ushort scanCode, bool isPressed)
         {
             throw new NotImplementedException();
         }

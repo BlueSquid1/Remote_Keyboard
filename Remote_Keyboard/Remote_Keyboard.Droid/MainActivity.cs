@@ -44,6 +44,15 @@ namespace Remote_Keyboard.Droid
             return base.OnKeyDown(keyCode, e);
         }
 
+        //detects hard keyboard inputs
+        public override bool OnKeyUp([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            ushort androidValue = (ushort)e.KeyCode;
+            textView.Text = (e.KeyCode).ToString();
+
+            return base.OnKeyDown(keyCode, e);
+        }
+
         private void TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
             if (e.Text.ToString().Length == 0)
@@ -56,6 +65,8 @@ namespace Remote_Keyboard.Droid
 
             textView.Text = text;
 
+            //clear value
+            editText.Text = "";
         }
     }
 }
