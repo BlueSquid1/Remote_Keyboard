@@ -13,54 +13,49 @@ namespace Remote_Keyboard.Droid
     {
         //private AlertDialog dialog;
 
-        public static TextView textView;
+        private TextView textView;
+        private EditText editText;
 
 
         //entry point
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            RelativeLayout layout = (RelativeLayout)FindViewById(Resource.Id.background);
 
+            //LinearLayout background = FindViewById<LinearLayout>(Resource.Id.background);
 
-            EditText editText = FindViewById<EditText>(Resource.Id.editText);
-            //TextView textView = FindViewById<TextView>(Resource.Id.textView);
-            //Button ButtonView = FindViewById<Button>(Resource.Id.button1);
+            editText = FindViewById<EditText>(Resource.Id.editText);
 
-            //KeypadHandler keypadHandler = new KeypadHandler();
+            textView = FindViewById<TextView>(Resource.Id.textView); 
 
+            editText.TextChanged += TextChanged;
 
-            //editText.KeyListener = temp;
-            //editText.SetOnKeyListener();
-
-            /*
-            var dialog = new AlertDialog.Builder(this)
-                                    .SetTitle("Delete entry")
-                                    .SetMessage("Are you sure you want to delete this entry?")
-                                     .Show();
-            */
-            View.IOnKeyListener x = (View.IOnKeyListener)new KeyListener();
-            layout.SetOnKeyListener(x);
+            
 
         }
-    }
 
-    public class KeyListener : Activity, View.IOnKeyListener
-    {
-        public bool OnKey(View v, [GeneratedEnum] Keycode keyCode, KeyEvent e)
+        //detects hard keyboard inputs
+        public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)
         {
-            //throw new NotImplementedException();
-            return false;
+            ushort androidValue = (ushort)e.KeyCode;
+            textView.Text = (e.KeyCode).ToString();
+            return base.OnKeyDown(keyCode, e);
         }
 
-        public bool OnKey(IDialogInterface dialog, [GeneratedEnum] Keycode keyCode, KeyEvent e)
+        private void TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            //throw new NotImplementedException();
-            return false;
+            if (e.Text.ToString().Length == 0)
+            {
+                //do nothing
+                return;
+            }
+
+            string text = e.Text.ToString();
+
+            textView.Text = text;
+
         }
     }
 }

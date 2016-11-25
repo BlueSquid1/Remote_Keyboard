@@ -6,10 +6,10 @@ namespace Remote_Keyboard
 {
     public interface EventManager
     {
-        void SendKeyPress(SDLK scanCode, bool isPressed);
+        void SendKeyPress(ushort scanCode, bool isPressed);
 
-        SDLK ScanCodeFromVirtualKey(uint virtualKeyCode);
+        ushort ScanCodeFromVirtualKey(ushort virtualKeyCode);
 
-        uint VirtualKeyFromScanCode(SDLK scanCode);
+        ushort VirtualKeyFromScanCode(ushort scanCode);
     }
 }
