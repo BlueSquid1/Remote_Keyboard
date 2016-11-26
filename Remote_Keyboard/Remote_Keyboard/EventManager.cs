@@ -6,21 +6,19 @@ namespace Remote_Keyboard
 {
     public abstract class EventManager
     {
-        //Hashtable sdlKeyToNativeKey = new Hashtable();
-        //Hashtable nativeKeyToSdlKey = new Hashtable();
+        protected Dictionary<string, ushort> sdlKeyToNativeKey = new Dictionary<string, ushort>();
+        protected Dictionary<ushort, string> nativeKeyToSdlKey = new Dictionary<ushort, string>();
 
-        protected SortedDictionary<string, ushort> sdlKeyToNativeKey = new SortedDictionary<string, ushort>();
-
-
-        public abstract void TriggerKeyPress(ushort scanCode, bool isPressed);
-
-        public abstract ushort ScanCodeFromVirtualKey(ushort virtualKeyCode);
-
-        public abstract ushort VirtualKeyFromScanCode(ushort scanCode);
-        
-        public string test()
+        //constructor
+        public EventManager()
         {
-            return "testing";
+            
         }
+
+        public abstract ushort SdlKeyToNativeKey(string sdlKey);
+
+        public abstract string NativeKeytoSdlKey(ushort scanCode);
+
+        public abstract void TriggerKeyPress(string sdlKey, bool isPressed);
     }
 }

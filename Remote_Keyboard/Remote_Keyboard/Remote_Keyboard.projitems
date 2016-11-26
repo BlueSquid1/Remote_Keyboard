@@ -13,9 +13,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)KeyCodes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NativeKeyMapper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XMLParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XMLParser.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)KeyMapping.xml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)KeyMapping.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

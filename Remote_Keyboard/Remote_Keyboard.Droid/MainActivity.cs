@@ -23,7 +23,7 @@ namespace Remote_Keyboard.Droid
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            EventManager eventManager = new EventManagerDroid();
+            EventManager eventManager = new EventManagerDroid(this.Assets);
 
             //LinearLayout background = FindViewById<LinearLayout>(Resource.Id.background);
 

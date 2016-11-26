@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.IO;
 
 namespace Remote_Keyboard
 {
@@ -9,12 +10,12 @@ namespace Remote_Keyboard
     {
         public static bool PopulateKeyMapFromXML(ref SortedDictionary<string, ushort> sdlKeyToNativeKey)
         {
-            XmlReader xmlReader = XmlReader.Create("KeyMapping.xml");
+            XmlReader xmlReader = XmlReader.Create("Remote_Keyboard.Droid.KeyMapping.xml");
             //skip header section
             xmlReader.MoveToContent();
 
             xmlReader.MoveToAttribute("id");
-            int keyvalue = xmlReader.ReadContentAsInt();
+            string keyvalue = xmlReader.Value;
 
             sdlKeyToNativeKey["F1"] = 1;
             return true;

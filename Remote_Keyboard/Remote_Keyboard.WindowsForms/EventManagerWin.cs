@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 
 using System.Runtime.InteropServices; //for calling win32 API
+using System.Xml;
 
 namespace Remote_Keyboard.WindowsForms
 {
@@ -18,20 +19,33 @@ namespace Remote_Keyboard.WindowsForms
         [DllImport("user32.dll")]
         private static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
-
-        private uint ScancodeFromVirtualKey(VirtualKeyShort virtualKeyCode)
+        public EventManagerWin()
         {
-            uint scanCode = MapVirtualKey((uint)virtualKeyCode, 0);
-            return scanCode;
+            XmlDocument doc = new XmlDocument();
+            doc.Load("KeyMapping.xml");
+
+            //loop through each key
+            foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+            {
+                string SDLKey = node.Attributes["name"]?.InnerText; //or loop through its children as well
+
+                //get key value for windows
+                string keyValueStr = node.SelectSingleNode("WindowsValue").InnerText;
+                ushort keyValue = Convert.ToUInt16(keyValueStr);
+
+                //store key
+                sdlKeyToNativeKey[SDLKey] = keyValue;
+                nativeKeyToSdlKey[keyValue] = SDLKey;
+            }
         }
 
-        public void SendKeyPress(SDLK scanCode, bool isPressed)
+        public override void TriggerKeyPress(string sdlKey, bool isPressed)
         {
 
             //Console.WriteLine( "scan code = " + scanCode );
 
             //convert to virtual key
-            VirtualKeyShort x = (VirtualKeyShort)VirtualKeyFromScanCode(scanCode);
+            //VirtualKeyShort x = (VirtualKeyShort)VirtualKeyFromScanCode(scanCode);
 
 
 
@@ -53,12 +67,12 @@ namespace Remote_Keyboard.WindowsForms
             */
         }
 
-        public uint VirtualKeyFromScanCode(SDLK scanCode)
+        public override ushort SdlKeyToNativeKey(string sdlKey)
         {
             throw new NotImplementedException();
         }
 
-        public SDLK ScanCodeFromVirtualKey(uint virtualKeyCode)
+        public override string NativeKeytoSdlKey(ushort scanCode)
         {
             throw new NotImplementedException();
         }

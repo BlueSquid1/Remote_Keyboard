@@ -9,33 +9,48 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.IO;
+using Android.Content.Res;
+using System.Xml;
 
 namespace Remote_Keyboard.Droid
 {
     class EventManagerDroid : EventManager
     {
         //constructor
-        public EventManagerDroid()
+        public EventManagerDroid(AssetManager assets)
         {
-            this.PopulateKeyMapping();
+            //StreamReader streamReader = new StreamReader(assets.Open("KeyMapping.xml"));
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(assets.Open("KeyMapping.xml"));
+
+            //loop through each key
+            foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+            {
+                string SDLKey = node.Attributes["name"]?.InnerText; //or loop through its children as well
+
+                //get key value for windows
+                string keyValueStr = node.SelectSingleNode("DroidValue").InnerText;
+                ushort keyValue = Convert.ToUInt16(keyValueStr);
+
+                //store key
+                sdlKeyToNativeKey[SDLKey] = keyValue;
+                nativeKeyToSdlKey[keyValue] = SDLKey;
+            }
         }
 
-        private void PopulateKeyMapping()
-        {
-            XMLParser.PopulateKeyMapFromXML(ref sdlKeyToNativeKey);
-        }
-
-        public override ushort ScanCodeFromVirtualKey(ushort virtualKeyCode)
+        public override string NativeKeytoSdlKey(ushort scanCode)
         {
             throw new NotImplementedException();
         }
 
-        public override void TriggerKeyPress(ushort scanCode, bool isPressed)
+        public override ushort SdlKeyToNativeKey(string sdlKey)
         {
             throw new NotImplementedException();
         }
 
-        public override ushort VirtualKeyFromScanCode(ushort scanCode)
+        public override void TriggerKeyPress(string scanCode, bool isPressed)
         {
             throw new NotImplementedException();
         }

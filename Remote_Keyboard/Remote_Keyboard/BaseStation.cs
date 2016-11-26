@@ -69,7 +69,7 @@ namespace Remote_Keyboard
         }
 
         //non-blocking
-        private async void BroadcastSendAsync(string message)
+        public async void BroadcastSendAsync(string message)
         {
             udpConnection.EnableBroadcast = true;
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, this.portNum);

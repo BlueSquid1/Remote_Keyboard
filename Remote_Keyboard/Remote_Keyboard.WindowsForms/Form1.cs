@@ -14,6 +14,8 @@ namespace Remote_Keyboard.WindowsForms
 {
     public partial class Form1 : Form
     {
+        private EventManagerWin eventManager;
+
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +23,7 @@ namespace Remote_Keyboard.WindowsForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            eventManager = new EventManagerWin();
         }
 
         private void keyTest_Click(object sender, EventArgs e)
@@ -38,7 +41,7 @@ namespace Remote_Keyboard.WindowsForms
         private void testKey_Click(object sender, EventArgs e)
         {
             EventManagerWin x = new EventManagerWin();
-            x.SendKeyPress(SDLK.c, false);
+            x.TriggerKeyPress("F1", true);
         }
     }
 }
