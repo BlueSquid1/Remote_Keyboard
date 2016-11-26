@@ -69,13 +69,19 @@ namespace Remote_Keyboard
         }
 
         //non-blocking
-        public async void BroadcastSendAsync(string message)
+        private async void BroadcastSendAsync(string message)
         {
             udpConnection.EnableBroadcast = true;
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, this.portNum);
             byte[] datagram = Encoding.ASCII.GetBytes(message);
 
             await udpConnection.SendAsync(datagram, datagram.Length, endPoint);
+        }
+
+
+        public void SendKey(ushort QTkeyCode, bool isDown)
+        {
+
         }
     }
 }

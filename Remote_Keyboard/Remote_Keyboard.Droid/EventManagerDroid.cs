@@ -12,23 +12,30 @@ using Android.Widget;
 
 namespace Remote_Keyboard.Droid
 {
-    class EventManagerDroid : IEventManager
+    class EventManagerDroid : EventManager
     {
-        //Hashtable qtKeyToNativeKey = new Hashtable();
-        //Hashtable nativeKeyToQtKey = new Hashtable();
+        //constructor
+        public EventManagerDroid()
+        {
+            this.PopulateKeyMapping();
+        }
 
+        private void PopulateKeyMapping()
+        {
+            XMLParser.PopulateKeyMapFromXML(ref sdlKeyToNativeKey);
+        }
 
-        public ushort ScanCodeFromVirtualKey(ushort virtualKeyCode)
+        public override ushort ScanCodeFromVirtualKey(ushort virtualKeyCode)
         {
             throw new NotImplementedException();
         }
 
-        public void TriggerKeyPress(ushort scanCode, bool isPressed)
+        public override void TriggerKeyPress(ushort scanCode, bool isPressed)
         {
             throw new NotImplementedException();
         }
 
-        public ushort VirtualKeyFromScanCode(ushort scanCode)
+        public override ushort VirtualKeyFromScanCode(ushort scanCode)
         {
             throw new NotImplementedException();
         }
