@@ -40,7 +40,6 @@ namespace Remote_Keyboard.WindowsForms
                     nativeKeyToSdlKey[keyValue] = SDLKey;
                 }
             }
-            Console.WriteLine("test");
         }
 
         public override void TriggerKeyPress(string sdlKey, bool isPressed)

@@ -77,5 +77,234 @@
     <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
   </key>
+
+  <key name="AC Home">
+    <DroidValue>122</DroidValue>
+    <WindowsValue>172</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AC Refresh">
+    <DroidValue></DroidValue>
+    <WindowsValue>168</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AC Search">
+    <DroidValue>84</DroidValue>
+    <WindowsValue>170</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AC Stop">
+    <DroidValue>86</DroidValue>
+    <WindowsValue>169</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="Again">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
   
+  <key name="AltErase">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="Application">
+    <DroidValue>117</DroidValue>
+    <WindowsValue>91</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AudioMute">
+    <DroidValue>164</DroidValue>
+    <WindowsValue>173</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AudioNext">
+    <DroidValue>87</DroidValue>
+    <WindowsValue>176</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AudioPlay">
+    <DroidValue>126</DroidValue>
+    <WindowsValue>179</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AudioPrev">
+    <DroidValue>88</DroidValue>
+    <WindowsValue>177</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AudioStop">
+    <DroidValue>86</DroidValue>
+    <WindowsValue>178</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="B">
+    <DroidValue>30</DroidValue>
+    <WindowsValue>66</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="C">
+    <DroidValue>31</DroidValue>
+    <WindowsValue>67</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="D">
+    <DroidValue>32</DroidValue>
+    <WindowsValue>68</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="E">
+    <DroidValue>33</DroidValue>
+    <WindowsValue>69</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="F">
+    <DroidValue>34</DroidValue>
+    <WindowsValue>70</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="G">
+    <DroidValue>35</DroidValue>
+    <WindowsValue>71</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="H">
+    <DroidValue>36</DroidValue>
+    <WindowsValue>72</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="I">
+    <DroidValue>37</DroidValue>
+    <WindowsValue>73</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="J">
+    <DroidValue>38</DroidValue>
+    <WindowsValue>74</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="K">
+    <DroidValue>39</DroidValue>
+    <WindowsValue>75</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="L">
+    <DroidValue>40</DroidValue>
+    <WindowsValue>76</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="M">
+    <DroidValue>41</DroidValue>
+    <WindowsValue>77</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="N">
+    <DroidValue>42</DroidValue>
+    <WindowsValue>78</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="O">
+    <DroidValue>43</DroidValue>
+    <WindowsValue>79</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="P">
+    <DroidValue>44</DroidValue>
+    <WindowsValue>80</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="Q">
+    <DroidValue>45</DroidValue>
+    <WindowsValue>81</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="R">
+    <DroidValue>46</DroidValue>
+    <WindowsValue>82</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="S">
+    <DroidValue>47</DroidValue>
+    <WindowsValue>83</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="T">
+    <DroidValue>48</DroidValue>
+    <WindowsValue>84</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="U">
+    <DroidValue>49</DroidValue>
+    <WindowsValue>85</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="V">
+    <DroidValue>50</DroidValue>
+    <WindowsValue>86</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="W">
+    <DroidValue>51</DroidValue>
+    <WindowsValue>87</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="X">
+    <DroidValue>52</DroidValue>
+    <WindowsValue>88</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="Y">
+    <DroidValue>53</DroidValue>
+    <WindowsValue>89</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="Z">
+    <DroidValue>54</DroidValue>
+    <WindowsValue>90</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+
+
+  <key name="Again">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
 </KeyMappingSDL>
