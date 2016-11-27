@@ -31,12 +31,16 @@ namespace Remote_Keyboard.WindowsForms
 
                 //get key value for windows
                 string keyValueStr = node.SelectSingleNode("WindowsValue").InnerText;
-                ushort keyValue = Convert.ToUInt16(keyValueStr);
+                if (keyValueStr != "")
+                {
+                    ushort keyValue = Convert.ToUInt16(keyValueStr);
 
-                //store key
-                sdlKeyToNativeKey[SDLKey] = keyValue;
-                nativeKeyToSdlKey[keyValue] = SDLKey;
+                    //store key
+                    sdlKeyToNativeKey[SDLKey] = keyValue;
+                    nativeKeyToSdlKey[keyValue] = SDLKey;
+                }
             }
+            Console.WriteLine("test");
         }
 
         public override void TriggerKeyPress(string sdlKey, bool isPressed)

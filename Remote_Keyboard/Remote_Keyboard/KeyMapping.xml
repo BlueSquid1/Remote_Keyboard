@@ -1,13 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KeyMappingSDL>
-  <key name="F1">
-    <DroidValue>1</DroidValue>
-    <WindowsValue>2</WindowsValue>
-    <iOSValue>3</iOSValue>
+  <key name="0">
+    <DroidValue>7</DroidValue>
+    <WindowsValue>48</WindowsValue>
+    <iOSValue></iOSValue>
   </key>
-  <key name="F2">
-    <DroidValue>2</DroidValue>
-    <WindowsValue>3</WindowsValue>
-    <iOSValue>4</iOSValue>
+  
+  <key name="1">
+    <DroidValue>8</DroidValue>
+    <WindowsValue>49</WindowsValue>
+    <iOSValue></iOSValue>
   </key>
+
+  <key name="2">
+    <DroidValue>9</DroidValue>
+    <WindowsValue>50</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="3">
+    <DroidValue>10</DroidValue>
+    <WindowsValue>51</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="4">
+    <DroidValue>11</DroidValue>
+    <WindowsValue>52</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="5">
+    <DroidValue>12</DroidValue>
+    <WindowsValue>53</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="6">
+    <DroidValue>13</DroidValue>
+    <WindowsValue>54</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="7">
+    <DroidValue>14</DroidValue>
+    <WindowsValue>55</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="8">
+    <DroidValue>15</DroidValue>
+    <WindowsValue>56</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="9">
+    <DroidValue>16</DroidValue>
+    <WindowsValue>57</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="A">
+    <DroidValue></DroidValue>
+    <WindowsValue>65</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AC Back">
+    <DroidValue>4</DroidValue>
+    <WindowsValue>166</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="AC Bookmarks">
+    <DroidValue>174</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
 </KeyMappingSDL>
