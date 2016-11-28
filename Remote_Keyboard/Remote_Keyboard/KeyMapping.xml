@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KeyMappingSDL>
+  <key name="\">
+    <DroidValue>73</DroidValue>
+    <WindowsValue>191</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name=",">
+    <DroidValue>55</DroidValue>
+    <WindowsValue>188</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+    
   <key name="0">
     <DroidValue>7</DroidValue>
     <WindowsValue>48</WindowsValue>
@@ -155,19 +167,130 @@
     <WindowsValue>66</WindowsValue>
     <iOSValue></iOSValue>
   </key>
-
+  
+  <key name="Backspace">
+    <DroidValue>67</DroidValue>
+    <WindowsValue>8</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="BrightnessDown">
+    <DroidValue>220</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="BrightnessUp">
+    <DroidValue>221</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
   <key name="C">
     <DroidValue>31</DroidValue>
     <WindowsValue>67</WindowsValue>
     <iOSValue></iOSValue>
   </key>
-
+  
+  <key name="Calculator">
+    <DroidValue>210</DroidValue>
+    <WindowsValue>187</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+ 
+  
+  <key name="Cancel">
+    <DroidValue>121</DroidValue>
+    <WindowsValue>3</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="CapsLock">
+    <DroidValue>115</DroidValue>
+    <WindowsValue>20</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Clear">
+    <DroidValue>28</DroidValue>
+    <WindowsValue>254</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Clear / Again">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Computer">
+    <DroidValue></DroidValue>
+    <WindowsValue>182</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Copy">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="CrSel">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="CurrencySubUnit">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="CurrencyUnit">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  
+  <key name="Cut">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
   <key name="D">
     <DroidValue>32</DroidValue>
     <WindowsValue>68</WindowsValue>
     <iOSValue></iOSValue>
   </key>
-
+  
+  <key name="DecimalSeparator">
+    <DroidValue></DroidValue>
+    <WindowsValue>110</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="DecimalSeparator">
+    <DroidValue></DroidValue>
+    <WindowsValue>110</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Delete">
+    <DroidValue>112</DroidValue>
+    <WindowsValue>46</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="DisplaySwitch">
+    <DroidValue>206</DroidValue>
+    <WindowsValue>31</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  <!-- got here -->
+    
   <key name="E">
     <DroidValue>33</DroidValue>
     <WindowsValue>69</WindowsValue>

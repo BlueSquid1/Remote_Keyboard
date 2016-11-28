@@ -100,623 +100,225 @@ namespace Remote_Keyboard
 
     public enum VirtualKeyShort : ushort
     {
-        #region Media
-
-        /// <summary>
-        /// Next track if a song is playing
-        /// </summary>
-        MEDIA_NEXT_TRACK = 0xb0,
-
-        /// <summary>
-        /// Play pause
-        /// </summary>
-        MEDIA_PLAY_PAUSE = 0xb3,
-
-        /// <summary>
-        /// Previous track
-        /// </summary>
-        MEDIA_PREV_TRACK = 0xb1,
-
-        /// <summary>
-        /// Stop
-        /// </summary>
-        MEDIA_STOP = 0xb2,
-
-        #endregion
-
-        #region math
-
-        /// <summary>Key "+"</summary>
-        ADD = 0x6b,
-        /// <summary>
-        /// "*" key
-        /// </summary>
-        MULTIPLY = 0x6a,
-
-        /// <summary>
-        /// "/" key
-        /// </summary>
-        DIVIDE = 0x6f,
-
-        /// <summary>
-        /// Subtract key "-"
-        /// </summary>
-        SUBTRACT = 0x6d,
-
-        #endregion
-
-        #region Browser
-        /// <summary>
-        /// Go Back
-        /// </summary>
-        BROWSER_BACK = 0xa6,
-        /// <summary>
-        /// Favorites
-        /// </summary>
-        BROWSER_FAVORITES = 0xab,
-        /// <summary>
-        /// Forward
-        /// </summary>
-        BROWSER_FORWARD = 0xa7,
-        /// <summary>
-        /// Home
-        /// </summary>
-        BROWSER_HOME = 0xac,
-        /// <summary>
-        /// Refresh
-        /// </summary>
-        BROWSER_REFRESH = 0xa8,
-        /// <summary>
-        /// browser search
-        /// </summary>
-        BROWSER_SEARCH = 170,
-        /// <summary>
-        /// Stop
-        /// </summary>
-        BROWSER_STOP = 0xa9,
-        #endregion
-
-        #region Numpad numbers
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD0 = 0x60,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD1 = 0x61,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD2 = 0x62,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD3 = 0x63,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD4 = 100,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD5 = 0x65,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD6 = 0x66,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD7 = 0x67,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD8 = 0x68,
-        /// <summary>
-        /// 
-        /// </summary>
-        NUMPAD9 = 0x69,
-
-        #endregion
-
-        #region Fkeys
-        /// <summary>
-        /// F1
-        /// </summary>
-        F1 = 0x70,
-        /// <summary>
-        /// F10
-        /// </summary>
-        F10 = 0x79,
-        /// <summary>
-        /// 
-        /// </summary>
-        F11 = 0x7a,
-        /// <summary>
-        /// 
-        /// </summary>
-        F12 = 0x7b,
-        /// <summary>
-        /// 
-        /// </summary>
-        F13 = 0x7c,
-        /// <summary>
-        /// 
-        /// </summary>
-        F14 = 0x7d,
-        /// <summary>
-        /// 
-        /// </summary>
-        F15 = 0x7e,
-        /// <summary>
-        /// 
-        /// </summary>
-        F16 = 0x7f,
-        /// <summary>
-        /// 
-        /// </summary>
-        F17 = 0x80,
-        /// <summary>
-        /// 
-        /// </summary>
-        F18 = 0x81,
-        /// <summary>
-        /// 
-        /// </summary>
-        F19 = 130,
-        /// <summary>
-        /// 
-        /// </summary>
-        F2 = 0x71,
-        /// <summary>
-        /// 
-        /// </summary>
-        F20 = 0x83,
-        /// <summary>
-        /// 
-        /// </summary>
-        F21 = 0x84,
-        /// <summary>
-        /// 
-        /// </summary>
-        F22 = 0x85,
-        /// <summary>
-        /// 
-        /// </summary>
-        F23 = 0x86,
-        /// <summary>
-        /// 
-        /// </summary>
-        F24 = 0x87,
-        /// <summary>
-        /// 
-        /// </summary>
-        F3 = 0x72,
-        /// <summary>
-        /// 
-        /// </summary>
-        F4 = 0x73,
-        /// <summary>
-        /// 
-        /// </summary>
-        F5 = 0x74,
-        /// <summary>
-        /// 
-        /// </summary>
-        F6 = 0x75,
-        /// <summary>
-        /// 
-        /// </summary>
-        F7 = 0x76,
-        /// <summary>
-        /// 
-        /// </summary>
-        F8 = 0x77,
-        /// <summary>
-        /// 
-        /// </summary>
-        F9 = 120,
-
-        #endregion
-
-        #region Other
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_1 = 0xba,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_102 = 0xe2,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_2 = 0xbf,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_3 = 0xc0,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_4 = 0xdb,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_5 = 220,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_6 = 0xdd,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_7 = 0xde,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_8 = 0xdf,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_CLEAR = 0xfe,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_COMMA = 0xbc,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_MINUS = 0xbd,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_PERIOD = 190,
-        /// <summary>
-        /// 
-        /// </summary>
-        OEM_PLUS = 0xbb,
-
+        #region COMPUTER
+        LBUTTON = 0x01,
+        RBUTTON = 0x02,
+        CANCEL = 0x03,
+        MBUTTON = 0x04,
+        XBUTTON1 = 0x05,    /* NOT contiguous with L & RBUTTON */
+        XBUTTON2 = 0x06,    /* NOT contiguous with L & RBUTTON */
+        BACK = 0x08,
+        TAB = 0x09,
+        CLEAR = 0x0C,
+        RETURN = 0x0D,
+        SHIFT = 0x10,
+        CONTROL = 0x11,
+        MENU = 0x12,
+        PAUSE = 0x13,
+        CAPITAL = 0x14,
+        KANA = 0x15,
+        HANGEUL = 0x15,  /* old name - should be here for compatibility */
+        HANGUL = 0x15,
+        JUNJA = 0x17,
+        FINAL = 0x18,
+        HANJA = 0x19,
+        KANJI = 0x19,
+        ESCAPE = 0x1B,
+        CONVERT = 0x1C,
+        NONCONVERT = 0x1D,
+        ACCEPT = 0x1E,
+        MODECHANGE = 0x1F,
+        SPACE = 0x20,
+        PRIOR = 0x21,
+        NEXT = 0x22,
+        END = 0x23,
+        HOME = 0x24,
+        LEFT = 0x25,
+        UP = 0x26,
+        RIGHT = 0x27,
+        DOWN = 0x28,
+        SELECT = 0x29,
+        PRINT = 0x2A,
+        EXECUTE = 0x2B,
+        SNAPSHOT = 0x2C,
+        INSERT = 0x2D,
+        DELETE = 0x2E,
+        HELP = 0x2F,
         #endregion
 
         #region KEYS
-
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_0 = 0x30,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_1 = 0x31,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_2 = 50,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_3 = 0x33,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_4 = 0x34,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_5 = 0x35,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_6 = 0x36,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_7 = 0x37,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_8 = 0x38,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_9 = 0x39,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_A = 0x41,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_B = 0x42,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_C = 0x43,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_D = 0x44,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_E = 0x45,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_F = 70,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_G = 0x47,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_H = 0x48,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_I = 0x49,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_J = 0x4a,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_K = 0x4b,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_L = 0x4c,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_M = 0x4d,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_N = 0x4e,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_O = 0x4f,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_P = 80,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_Q = 0x51,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_R = 0x52,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_S = 0x53,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_T = 0x54,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_U = 0x55,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_V = 0x56,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_W = 0x57,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_X = 0x58,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_Y = 0x59,
-        /// <summary>
-        /// 
-        /// </summary>
         KEY_Z = 90,
-
         #endregion
 
-        #region volume
-        /// <summary>
-        /// Decrese volume
-        /// </summary>
-        VOLUME_DOWN = 0xae,
-
-        /// <summary>
-        /// Mute volume
-        /// </summary>
-        VOLUME_MUTE = 0xad,
-
-        /// <summary>
-        /// Increase volue
-        /// </summary>
-        VOLUME_UP = 0xaf,
-
-        #endregion
-
-        #region Special
-
-        /// <summary>
-        /// Take snapshot of the screen and place it on the clipboard
-        /// </summary>
-        SNAPSHOT = 0x2c,
-
-        /// <summary>Send right click from keyboard "key that is 2 keys to the right of space bar"</summary>
-        RightClick = 0x5d,
-
-        /// <summary>
-        /// Go Back or delete
-        /// </summary>
-        BACKSPACE = 8,
-
-        /// <summary>
-        /// Control + Break "When debuging if you step into an infinite loop this will stop debug"
-        /// </summary>
-        CANCEL = 3,
-        /// <summary>
-        /// Caps lock key to send cappital letters
-        /// </summary>
-        CAPS_LOCK = 20,
-        /// <summary>
-        /// Ctlr key
-        /// </summary>
-        CONTROL = 0x11,
-
-        /// <summary>
-        /// Alt key
-        /// </summary>
-        ALT = 18,
-
-        /// <summary>
-        /// "." key
-        /// </summary>
-        DECIMAL = 110,
-
-        /// <summary>
-        /// Delete Key
-        /// </summary>
-        DELETE = 0x2e,
-
-
-        /// <summary>
-        /// Arrow down key
-        /// </summary>
-        DOWN = 40,
-
-        /// <summary>
-        /// End key
-        /// </summary>
-        END = 0x23,
-
-        /// <summary>
-        /// Escape key
-        /// </summary>
-        ESC = 0x1b,
-
-        /// <summary>
-        /// Home key
-        /// </summary>
-        HOME = 0x24,
-
-        /// <summary>
-        /// Insert key
-        /// </summary>
-        INSERT = 0x2d,
-
-        /// <summary>
-        /// Open my computer
-        /// </summary>
-        LAUNCH_APP1 = 0xb6,
-        /// <summary>
-        /// Open calculator
-        /// </summary>
-        LAUNCH_APP2 = 0xb7,
-
-        /// <summary>
-        /// Open default email in my case outlook
-        /// </summary>
-        LAUNCH_MAIL = 180,
-
-        /// <summary>
-        /// Opend default media player (itunes, winmediaplayer, etc)
-        /// </summary>
-        LAUNCH_MEDIA_SELECT = 0xb5,
-
-        /// <summary>
-        /// Left control
-        /// </summary>
-        LCONTROL = 0xa2,
-
-        /// <summary>
-        /// Left arrow
-        /// </summary>
-        LEFT = 0x25,
-
-        /// <summary>
-        /// Left shift
-        /// </summary>
-        LSHIFT = 160,
-
-        /// <summary>
-        /// left windows key
-        /// </summary>
-        LWIN = 0x5b,
-
-
-        /// <summary>
-        /// Next "page down"
-        /// </summary>
-        PAGEDOWN = 0x22,
-
-        /// <summary>
-        /// Num lock to enable typing numbers
-        /// </summary>
+        #region FUNCTION_KEYS
+        LWIN = 0x5B,
+        RWIN = 0x5C,
+        APPS = 0x5D,
+        SLEEP = 0x5F,
+        NUMPAD0 = 0x60,
+        NUMPAD1 = 0x61,
+        NUMPAD2 = 0x62,
+        NUMPAD3 = 0x63,
+        NUMPAD4 = 0x64,
+        NUMPAD5 = 0x65,
+        NUMPAD6 = 0x66,
+        NUMPAD7 = 0x67,
+        NUMPAD8 = 0x68,
+        NUMPAD9 = 0x69,
+        MULTIPLY = 0x6A,
+        ADD = 0x6B,
+        SEPARATOR = 0x6C,
+        SUBTRACT = 0x6D,
+        DECIMAL = 0x6E,
+        DIVIDE = 0x6F,
+        F1 = 0x70,
+        F2 = 0x71,
+        F3 = 0x72,
+        F4 = 0x73,
+        F5 = 0x74,
+        F6 = 0x75,
+        F7 = 0x76,
+        F8 = 0x77,
+        F9 = 0x78,
+        F10 = 0x79,
+        F11 = 0x7A,
+        F12 = 0x7B,
+        F13 = 0x7C,
+        F14 = 0x7D,
+        F15 = 0x7E,
+        F16 = 0x7F,
+        F17 = 0x80,
+        F18 = 0x81,
+        F19 = 0x82,
+        F20 = 0x83,
+        F21 = 0x84,
+        F22 = 0x85,
+        F23 = 0x86,
+        F24 = 0x87,
         NUMLOCK = 0x90,
+        SCROLL = 0x91,
+        OEM_NEC_EQUAL = 0x92,   // '=' key on numpad
+OEM_FJ_JISHO = 0x92,   // 'Dictionary' key
+OEM_FJ_MASSHOU = 0x93,   // 'Unregister word' key
+OEM_FJ_TOUROKU = 0x94,   // 'Register word' key
+OEM_FJ_LOYA = 0x95,   // 'Left OYAYUBI' key
+OEM_FJ_ROYA = 0x96,   // 'Right OYAYUBI' key
 
-        /// <summary>
-        /// Page up key
-        /// </summary>
-        PAGE_UP = 0x21,
 
-        /// <summary>
-        /// Right control
-        /// </summary>
-        RCONTROL = 0xa3,
+/*
+ * L* & R* - left and right Alt, Ctrl and Shift virtual keys.
+ * Used only as parameters to GetAsyncKeyState() and GetKeyState().
+ * No other API or message will distinguish left and right keys in this way.
+ */
+LSHIFT = 0xA0,
+        RSHIFT = 0xA1,
+        LCONTROL = 0xA2,
+        RCONTROL = 0xA3,
+        LMENU = 0xA4,
+        RMENU = 0xA5,
 
-        /// <summary>
-        /// Return key
-        /// </summary>
-        ENTER = 13,
+        BROWSER_BACK = 0xA6,
+        BROWSER_FORWARD = 0xA7,
+        BROWSER_REFRESH = 0xA8,
+        BROWSER_STOP = 0xA9,
+        BROWSER_SEARCH = 0xAA,
+        BROWSER_FAVORITES = 0xAB,
+        BROWSER_HOME = 0xAC,
+        VOLUME_MUTE = 0xAD,
+        VOLUME_DOWN = 0xAE,
+        VOLUME_UP = 0xAF,
+        MEDIA_NEXT_TRACK = 0xB0,
+        MEDIA_PREV_TRACK = 0xB1,
+        MEDIA_STOP = 0xB2,
+        MEDIA_PLAY_PAUSE = 0xB3,
+        LAUNCH_MAIL = 0xB4,
+        LAUNCH_MEDIA_SELECT = 0xB5,
+        LAUNCH_APP1 = 0xB6,
+        LAUNCH_APP2 = 0xB7,
 
-        /// <summary>
-        /// Right arrow key
-        /// </summary>
-        RIGHT = 0x27,
-
-        /// <summary>
-        /// Right shift
-        /// </summary>
-        RSHIFT = 0xa1,
-
-        /// <summary>
-        /// Right windows key
-        /// </summary>
-        RWIN = 0x5c,
-
-        /// <summary>
-        /// Shift key
-        /// </summary>
-        SHIFT = 0x10,
-
-        /// <summary>
-        /// Space back key
-        /// </summary>
-        SPACE_BAR = 0x20,
-
-        /// <summary>
-        /// Tab key
-        /// </summary>
-        TAB = 9,
-
-        /// <summary>
-        /// Up arrow key
-        /// </summary>
-        UP = 0x26,
+        OEM_1 = 0xBA,   // ';:' for US
+        OEM_PLUS = 0xBB,   // '+' any country
+        OEM_COMMA = 0xBC,   // ',' any country
+        OEM_MINUS = 0xBD,   // '-' any country
+        OEM_PERIOD = 0xBE,   // '.' any country
+        OEM_2 = 0xBF,   // '/?' for US
+        OEM_3 = 0xC0,   // '`~' for US
+        OEM_4 = 0xDB,  //  '[{' for US
+        OEM_5 = 0xDC,  //  '\|' for US
+        OEM_6 = 0xDD,  //  ']}' for US
+        OEM_7 = 0xDE,  //  ''"' for US
+        OEM_8 = 0xDF,
         #endregion
 
+        #region ENHANCEMENTS
+        OEM_AX = 0xE1,  //  'AX' key on Japanese AX kbd
+        OEM_102 = 0xE2,  //  "<>" or "\|" on RT 102-key kbd.
+        ICO_HELP = 0xE3,  //  Help key on ICO
+        ICO_00 = 0xE4,  //  00 key on ICO
+        PROCESSKEY = 0xE5,
+        ICO_CLEAR = 0xE6,
+        PACKET = 0xE7,
+        #endregion
+
+        #region NOKIA
+        OEM_RESET = 0xE9,
+        OEM_JUMP = 0xEA,
+        OEM_PA1 = 0xEB,
+        OEM_PA2 = 0xEC,
+        OEM_PA3 = 0xED,
+        OEM_WSCTRL = 0xEE,
+        OEM_CUSEL = 0xEF,
+        OEM_ATTN = 0xF0,
+        OEM_FINISH = 0xF1,
+        OEM_COPY = 0xF2,
+        OEM_AUTO = 0xF3,
+        OEM_ENLW = 0xF4,
+        OEM_BACKTAB = 0xF5,
+        ATTN = 0xF6,
+        CRSEL = 0xF7,
+        EXSEL = 0xF8,
+        EREOF = 0xF9,
+        PLAY = 0xFA,
+        ZOOM = 0xFB,
+        NONAME = 0xFC,
+        PA1 = 0xFD,
+        OEM_CLEAR = 0xFE
+        #endregion
     }
 
     /// <summary>
