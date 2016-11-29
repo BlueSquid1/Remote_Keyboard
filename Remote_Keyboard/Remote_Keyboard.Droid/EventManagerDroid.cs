@@ -21,7 +21,7 @@ namespace Remote_Keyboard.Droid
         public EventManagerDroid(AssetManager assets)
         {
             //StreamReader streamReader = new StreamReader(assets.Open("KeyMapping.xml"));
-
+            
             XmlDocument doc = new XmlDocument();
             doc.Load(assets.Open("KeyMapping.xml"));
 
