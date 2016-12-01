@@ -36,7 +36,8 @@
     <iOSValue></iOSValue>
   </key>
   
-  <key name="&">
+  <!-- & -->
+  <key name="&amp;">
     <DroidValue></DroidValue>
     <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
@@ -108,7 +109,8 @@
     <iOSValue></iOSValue>
   </key>
   
-  <key name="<">
+  <!-- < -->
+  <key name="&lt;">
     <DroidValue></DroidValue>
     <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
@@ -132,7 +134,8 @@
     <iOSValue></iOSValue>
   </key>
   
-  <key name=""">
+  <!-- " -->
+  <key name="&quot;">
     <DroidValue></DroidValue>
     <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
@@ -772,7 +775,8 @@
     <iOSValue></iOSValue>
   </key>
   
-  <key name="Keypad &&">
+  <!-- Keypad && -->
+  <key name="Keypad &quot;&quot;">
     <DroidValue></DroidValue>
     <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
@@ -910,7 +914,8 @@
     <iOSValue></iOSValue>
   </key>
   
-  <key name="Keypad <">
+  <!-- Keypad < -->
+  <key name="Keypad &lt;">
     <DroidValue></DroidValue>
     <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>

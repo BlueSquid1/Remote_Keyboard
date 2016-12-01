@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
 using System.Runtime.InteropServices; //for calling win32 API
-using System.Xml;
+using System.Xml; //for xml parsing
 
 namespace Remote_Keyboard.WindowsForms
 {
@@ -19,15 +19,29 @@ namespace Remote_Keyboard.WindowsForms
         [DllImport("user32.dll")]
         private static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
+        //constructor
         public EventManagerWin()
         {
+            string xmlMapperFile = "KeyMapping.xml";
+            PopulateKeyMapping(xmlMapperFile);
+        }
+
+        private void PopulateKeyMapping(string xmlMapperFile)
+        {
+            //create an xmlReader
+            XmlReaderSettings readerSettings = new XmlReaderSettings();
+            readerSettings.IgnoreComments = true;
+            XmlReader reader = XmlReader.Create(xmlMapperFile, readerSettings);
+
+            //conver to XmlDocument
             XmlDocument doc = new XmlDocument();
-            doc.Load("KeyMapping.xml");
+            doc.Load(reader);
 
             //loop through each key
             foreach (XmlNode node in doc.DocumentElement.ChildNodes)
             {
-                string SDLKey = node.Attributes["name"]?.InnerText; //or loop through its children as well
+                XmlAttribute nameAttribute = node.Attributes["name"];
+                string SDLKey = nameAttribute?.InnerText; //or loop through its children as well
 
                 //get key value for windows
                 string keyValueStr = node.SelectSingleNode("WindowsValue").InnerText;
