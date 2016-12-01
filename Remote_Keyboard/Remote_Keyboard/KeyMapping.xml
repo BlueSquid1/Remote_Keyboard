@@ -6,9 +6,9 @@
     <iOSValue></iOSValue>
   </key>
   
-  <key name="Keypad &&">
-    <DroidValue></DroidValue>
-    <WindowsValue></WindowsValue>
+  <key name="/">
+    <DroidValue>76</DroidValue>
+    <WindowsValue>191</WindowsValue>
     <iOSValue></iOSValue>
   </key>
   
@@ -18,27 +18,15 @@
     <iOSValue></iOSValue>
   </key>
   
-  <key name="Keypad :">
-    <DroidValue></DroidValue>
-    <WindowsValue></WindowsValue>
+  <key name=";">
+    <DroidValue>74</DroidValue>
+    <WindowsValue>186</WindowsValue>
     <iOSValue></iOSValue>
   </key>
   
-  <key name="Keypad ,">
-    <DroidValue></DroidValue>
-    <WindowsValue></WindowsValue>
-    <iOSValue></iOSValue>
-  </key>
-  
-  <key name="Keypad D">
-    <DroidValue></DroidValue>
-    <WindowsValue></WindowsValue>
-    <iOSValue></iOSValue>
-  </key>
-  
-  <key name="Keypad ||">
-    <DroidValue></DroidValue>
-    <WindowsValue></WindowsValue>
+  <key name="]">
+    <DroidValue>72</DroidValue>
+    <WindowsValue>221</WindowsValue>
     <iOSValue></iOSValue>
   </key>
     
@@ -48,6 +36,120 @@
     <iOSValue></iOSValue>
   </key>
   
+  <key name="&">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+    
+  <key name="*">
+    <DroidValue>17</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="@">
+    <DroidValue>77</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  
+    
+    
+    
+  
+  
+  
+    
+    
+    
+  
+  
+  <key name="^">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name=":">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="$">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="!">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+      
+  <key name=">">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+      
+  <key name="#">
+    <DroidValue>18</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="(">
+    <DroidValue>162</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="<">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="%">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="+">
+    <DroidValue>81</DroidValue>
+    <WindowsValue>187</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="?">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name=""">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name=")">
+    <DroidValue>163</DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="_">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+    
   <key name="=">
     <DroidValue>70</DroidValue>
     <WindowsValue></WindowsValue>
@@ -670,6 +772,36 @@
     <iOSValue></iOSValue>
   </key>
   
+  <key name="Keypad &&">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Keypad :">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+    <key name="Keypad ||">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Keypad ,">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Keypad D">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
   <key name="Keypad Backspace">
     <DroidValue></DroidValue>
     <WindowsValue></WindowsValue>
@@ -1095,10 +1227,64 @@
     <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
   </key>
+  
+  <key name="Right">
+    <DroidValue>22</DroidValue>
+    <WindowsValue>39</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Right Shift">
+    <DroidValue>60</DroidValue>
+    <WindowsValue>161</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
 
   <key name="S">
     <DroidValue>47</DroidValue>
     <WindowsValue>83</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="ScrollLock">
+    <DroidValue>116</DroidValue>
+    <WindowsValue>145</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Select">
+    <DroidValue></DroidValue>
+    <WindowsValue>41</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Separator">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Sleep">
+    <DroidValue>223</DroidValue>
+    <WindowsValue>95</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Space">
+    <DroidValue>62</DroidValue>
+    <WindowsValue>32</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Stop">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="SysReq">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
   </key>
 
@@ -1107,10 +1293,34 @@
     <WindowsValue>84</WindowsValue>
     <iOSValue></iOSValue>
   </key>
+  
+  <key name="Tab">
+    <DroidValue>61</DroidValue>
+    <WindowsValue>9</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="ThousandsSeparator">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
 
   <key name="U">
     <DroidValue>49</DroidValue>
     <WindowsValue>85</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Undo">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="Up">
+    <DroidValue>19</DroidValue>
+    <WindowsValue>38</WindowsValue>
     <iOSValue></iOSValue>
   </key>
 
@@ -1119,10 +1329,28 @@
     <WindowsValue>86</WindowsValue>
     <iOSValue></iOSValue>
   </key>
+  
+  <key name="VolumeDown">
+    <DroidValue>25</DroidValue>
+    <WindowsValue>174</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+  <key name="VolumeUp">
+    <DroidValue>24</DroidValue>
+    <WindowsValue>175</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
 
   <key name="W">
     <DroidValue>51</DroidValue>
     <WindowsValue>87</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+  
+    <key name="WWW">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
   </key>
 
@@ -1141,14 +1369,6 @@
   <key name="Z">
     <DroidValue>54</DroidValue>
     <WindowsValue>90</WindowsValue>
-    <iOSValue></iOSValue>
-  </key>
-  
-
-
-  <key name="Again">
-    <DroidValue></DroidValue>
-    <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
   </key>
 </KeyMappingSDL>
