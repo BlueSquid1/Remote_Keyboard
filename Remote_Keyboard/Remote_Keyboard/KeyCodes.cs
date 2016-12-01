@@ -245,7 +245,7 @@ OEM_FJ_ROYA = 0x96,   // 'Right OYAYUBI' key
  * Used only as parameters to GetAsyncKeyState() and GetKeyState().
  * No other API or message will distinguish left and right keys in this way.
  */
-LSHIFT = 0xA0,
+        LSHIFT = 0xA0,
         RSHIFT = 0xA1,
         LCONTROL = 0xA2,
         RCONTROL = 0xA3,
