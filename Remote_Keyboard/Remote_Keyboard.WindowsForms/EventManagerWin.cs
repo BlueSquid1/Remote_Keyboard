@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using System.Runtime.InteropServices; //for calling win32 API
 using System.Xml; //for xml parsing
+using Remote_Keyboard.Events; //handling keyboard events
 
 namespace Remote_Keyboard.WindowsForms
 {
@@ -22,56 +23,38 @@ namespace Remote_Keyboard.WindowsForms
         //constructor
         public EventManagerWin()
         {
-            string xmlMapperFile = "KeyMapping.xml";
-            PopulateKeyMapping(xmlMapperFile);
-        }
-
-        private void PopulateKeyMapping(string xmlMapperFile)
-        {
-            //create an xmlReader
-            XmlReaderSettings readerSettings = new XmlReaderSettings();
-            readerSettings.IgnoreComments = true;
-            XmlReader reader = XmlReader.Create(xmlMapperFile, readerSettings);
-
-            //conver to XmlDocument
-            XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
-
-            //loop through each key
-            foreach (XmlNode node in doc.DocumentElement.ChildNodes)
-            {
-                XmlAttribute nameAttribute = node.Attributes["name"];
-                string SDLKey = nameAttribute?.InnerText; //or loop through its children as well
-
-                //get key value for windows
-                string keyValueStr = node.SelectSingleNode("WindowsValue").InnerText;
-                if (keyValueStr != "")
-                {
-                    ushort keyValue = Convert.ToUInt16(keyValueStr);
-
-                    //store key
-                    sdlKeyToNativeKey[SDLKey] = keyValue;
-                    nativeKeyToSdlKey[keyValue] = SDLKey;
-                }
-            }
+            base.keyMapper = new NativeKeyMapper(PlateformID.winForms);
         }
 
         public override void TriggerKeyPress(string sdlKey, bool isPressed)
         {
+            //convert sdl value to native value
+            ushort virtualKey = base.keyMapper.SdlToNativeKey(sdlKey);
+            ushort scanCode = (ushort)MapVirtualKey(virtualKey, 0);
 
-            //Console.WriteLine( "scan code = " + scanCode );
+            uint extendedFlag = 0x100;
+            bool isExtended = (scanCode & extendedFlag) != 0;
 
-            //convert to virtual key
-            //VirtualKeyShort x = (VirtualKeyShort)VirtualKeyFromScanCode(scanCode);
+            uint tempflags = 0;
+            if (isExtended)
+            {
+                tempflags = 0x0001;
+            }
+            if (!isPressed)
+            {
+                uint KEYEVENTF_KEYUP = 0x0002;
+                tempflags |= KEYEVENTF_KEYUP;
+            }
 
 
-
-            /*
             INPUT input = new INPUT();
 
-            input.type = 1; //keyboard
+            input.type = (uint)1; //keyboard
 
-            input.U.ki.wVk = virutalKey;
+            input.U.ki.wVk = virtualKey;
+            input.U.ki.wScan = scanCode;
+            input.U.ki.time = 0;
+            input.U.ki.dwFlags = tempflags;
 
             INPUT[] inputArray = new INPUT[] { input };
             uint inputLen = (uint)inputArray.Length;
@@ -81,17 +64,6 @@ namespace Remote_Keyboard.WindowsForms
             {
                 throw new Exception();
             }
-            */
-        }
-
-        public override ushort SdlKeyToNativeKey(string sdlKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NativeKeytoSdlKey(ushort scanCode)
-        {
-            throw new NotImplementedException();
         }
     }
 }

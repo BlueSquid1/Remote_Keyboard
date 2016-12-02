@@ -5,7 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Collections;
 
-namespace Remote_Keyboard
+namespace Remote_Keyboard.Events
 {
     /// <summary>
     /// http://msdn.microsoft.com/en-us/library/windows/desktop/ms646270(v=vs.85).aspx
@@ -81,9 +81,9 @@ namespace Remote_Keyboard
     [StructLayout(LayoutKind.Sequential)]
     internal struct KEYBDINPUT
     {
-        internal VirtualKeyShort wVk;
-        internal uint wScan;
-        internal KEYEVENTF dwFlags;
+        internal ushort wVk;
+        internal ushort wScan;
+        internal uint dwFlags;
         internal uint time;
         internal UIntPtr ExtraInfo;
     }

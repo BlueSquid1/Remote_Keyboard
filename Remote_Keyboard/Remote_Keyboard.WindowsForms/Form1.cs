@@ -40,8 +40,10 @@ namespace Remote_Keyboard.WindowsForms
 
         private void testKey_Click(object sender, EventArgs e)
         {
-            EventManagerWin x = new EventManagerWin();
-            x.TriggerKeyPress("F1", true);
+            System.Threading.Thread.Sleep(2000);
+            eventManager.TriggerKeyPress("F12", true);
+            System.Threading.Thread.Sleep(100);
+            eventManager.TriggerKeyPress("F12", false);
         }
     }
 }
