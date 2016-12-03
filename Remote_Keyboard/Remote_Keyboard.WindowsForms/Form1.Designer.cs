@@ -28,74 +28,113 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.keyTest = new System.Windows.Forms.Button();
-            this.StartListerning = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Connect = new System.Windows.Forms.Button();
+            this.IPTxtBx = new System.Windows.Forms.TextBox();
+            this.ConnectBtn = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.KeyCaptureBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // keyTest
+            // IPTxtBx
             // 
-            this.keyTest.Location = new System.Drawing.Point(95, 112);
-            this.keyTest.Name = "keyTest";
-            this.keyTest.Size = new System.Drawing.Size(75, 23);
-            this.keyTest.TabIndex = 0;
-            this.keyTest.Text = "Keyboard";
-            this.keyTest.UseVisualStyleBackColor = true;
-            this.keyTest.Click += new System.EventHandler(this.keyTest_Click);
+            this.IPTxtBx.Location = new System.Drawing.Point(115, 37);
+            this.IPTxtBx.Name = "IPTxtBx";
+            this.IPTxtBx.Size = new System.Drawing.Size(100, 20);
+            this.IPTxtBx.TabIndex = 3;
             // 
-            // StartListerning
+            // ConnectBtn
             // 
-            this.StartListerning.Location = new System.Drawing.Point(95, 75);
-            this.StartListerning.Name = "StartListerning";
-            this.StartListerning.Size = new System.Drawing.Size(75, 23);
-            this.StartListerning.TabIndex = 1;
-            this.StartListerning.Text = "Listen";
-            this.StartListerning.UseVisualStyleBackColor = true;
-            this.StartListerning.Click += new System.EventHandler(this.StartListerning_Click);
+            this.ConnectBtn.Location = new System.Drawing.Point(34, 37);
+            this.ConnectBtn.Name = "ConnectBtn";
+            this.ConnectBtn.Size = new System.Drawing.Size(75, 23);
+            this.ConnectBtn.TabIndex = 4;
+            this.ConnectBtn.Text = "Connect";
+            this.ConnectBtn.UseVisualStyleBackColor = true;
+            this.ConnectBtn.Click += new System.EventHandler(this.Connect_Click);
             // 
-            // textBox1
+            // tabControl1
             // 
-            this.textBox1.Location = new System.Drawing.Point(187, 210);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(568, 317);
+            this.tabControl1.TabIndex = 5;
             // 
-            // Connect
+            // tabPage1
             // 
-            this.Connect.Location = new System.Drawing.Point(95, 206);
-            this.Connect.Name = "Connect";
-            this.Connect.Size = new System.Drawing.Size(75, 23);
-            this.Connect.TabIndex = 4;
-            this.Connect.Text = "Connect";
-            this.Connect.UseVisualStyleBackColor = true;
-            this.Connect.Click += new System.EventHandler(this.Connect_Click);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(560, 291);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.KeyCaptureBtn);
+            this.tabPage2.Controls.Add(this.ConnectBtn);
+            this.tabPage2.Controls.Add(this.IPTxtBx);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(560, 291);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // KeyCaptureBtn
+            // 
+            this.KeyCaptureBtn.Location = new System.Drawing.Point(140, 94);
+            this.KeyCaptureBtn.Name = "KeyCaptureBtn";
+            this.KeyCaptureBtn.Size = new System.Drawing.Size(75, 23);
+            this.KeyCaptureBtn.TabIndex = 5;
+            this.KeyCaptureBtn.Text = "Start";
+            this.KeyCaptureBtn.UseVisualStyleBackColor = true;
+            this.KeyCaptureBtn.Click += new System.EventHandler(this.KeyCaptureBtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(33, 99);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Enable Key Capture";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 261);
-            this.Controls.Add(this.Connect);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.StartListerning);
-            this.Controls.Add(this.keyTest);
+            this.ClientSize = new System.Drawing.Size(592, 341);
+            this.Controls.Add(this.tabControl1);
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button keyTest;
-        private System.Windows.Forms.Button StartListerning;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button Connect;
+        private System.Windows.Forms.TextBox IPTxtBx;
+        private System.Windows.Forms.Button ConnectBtn;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button KeyCaptureBtn;
     }
 }
 

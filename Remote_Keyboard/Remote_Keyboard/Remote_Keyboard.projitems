@@ -9,7 +9,7 @@
     <Import_RootNamespace>Remote_Keyboard</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Common\RemoteControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\TransmitState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\BaseStation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\EventManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\KeyCodes.cs" />
