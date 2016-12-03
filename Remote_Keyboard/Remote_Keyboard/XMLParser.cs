@@ -6,19 +6,11 @@ using System.IO;
 
 namespace Remote_Keyboard
 {
-    class XMLParser
+    public class XMLParser
     {
-        public static bool PopulateKeyMapFromXML(ref SortedDictionary<string, ushort> sdlKeyToNativeKey)
+        public static string ParseKeyPress(string sdlValue, bool isPressed)
         {
-            XmlReader xmlReader = XmlReader.Create("Remote_Keyboard.Droid.KeyMapping.xml");
-            //skip header section
-            xmlReader.MoveToContent();
-
-            xmlReader.MoveToAttribute("id");
-            string keyvalue = xmlReader.Value;
-
-            sdlKeyToNativeKey["F1"] = 1;
-            return true;
+            return sdlValue + isPressed.ToString();
         }
     }
 }

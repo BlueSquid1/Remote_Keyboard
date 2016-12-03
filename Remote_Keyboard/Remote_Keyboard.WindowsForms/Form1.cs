@@ -9,12 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Remote_Keyboard;
+using Remote_Keyboard.Common;
+using System.Runtime.InteropServices;
 
 namespace Remote_Keyboard.WindowsForms
 {
     public partial class Form1 : Form
     {
-        private EventManagerWin eventManager;
+        private RemoteControl remoteControl;
+
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(Keys vKey);
+
 
         public Form1()
         {
@@ -23,13 +29,14 @@ namespace Remote_Keyboard.WindowsForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            eventManager = new EventManagerWin();
+            EventManagerWin eventManager = new EventManagerWin();
+            remoteControl = new RemoteControl(eventManager);
         }
 
         private void keyTest_Click(object sender, EventArgs e)
         {
             BaseStation baseStation = BaseStation.GetInstance(10000);
-            baseStation.BroadcastSendAsync("hello world");
+            baseStation.SendBroadcastAsync("hello world");
         }
 
         private void StartListerning_Click(object sender, EventArgs e)
@@ -38,12 +45,45 @@ namespace Remote_Keyboard.WindowsForms
             baseStation.StartingListeningAsync();
         }
 
-        private void testKey_Click(object sender, EventArgs e)
+        private void Connect_Click(object sender, EventArgs e)
         {
-            System.Threading.Thread.Sleep(2000);
-            eventManager.TriggerKeyPress("F12", true);
-            System.Threading.Thread.Sleep(100);
-            eventManager.TriggerKeyPress("F12", false);
+
+        }
+
+        private void KeyDownEvent(object sender, KeyEventArgs e)
+        {
+            ushort keyValue = PreProcessKeyEvent(e);
+            bool isPressed = true;
+            remoteControl.SendKey(keyValue, isPressed);
+        }
+
+        private ushort PreProcessKeyEvent(KeyEventArgs e)
+        {
+            ushort keyValue = (ushort)e.KeyValue;
+            if ( e.KeyCode == Keys.ShiftKey )
+            {
+                if (Convert.ToBoolean(GetAsyncKeyState(Keys.RShiftKey)))
+                {
+                    keyValue = (ushort)Keys.RShiftKey;
+                }
+                else
+                {
+                    keyValue = (ushort)Keys.LShiftKey;
+                }
+            }
+
+            if( e.KeyCode == Keys.ControlKey )
+            {
+                if (Convert.ToBoolean(GetAsyncKeyState(Keys.RControlKey)))
+                {
+                    keyValue = (ushort)Keys.RControlKey;
+                }
+                else
+                {
+                    keyValue = (ushort)Keys.LControlKey;
+                }
+            }
+            return keyValue;
         }
     }
 }

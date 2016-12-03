@@ -21,9 +21,9 @@ namespace Remote_Keyboard.WindowsForms
         private static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
         //constructor
-        public EventManagerWin()
+        public EventManagerWin() : base(PlateformID.winForms)
         {
-            base.keyMapper = new NativeKeyMapper(PlateformID.winForms);
+
         }
 
         public override void TriggerKeyPress(string sdlKey, bool isPressed)

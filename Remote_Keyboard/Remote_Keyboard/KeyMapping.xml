@@ -8,13 +8,19 @@
   
   <key name="/">
     <DroidValue>76</DroidValue>
-    <WindowsValue>191</WindowsValue>
+    <WindowsValue>220</WindowsValue>
     <iOSValue></iOSValue>
   </key>
   
   <key name=".">
     <DroidValue>56</DroidValue>
     <WindowsValue>190</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="'">
+    <DroidValue>75</DroidValue>
+    <WindowsValue>222</WindowsValue>
     <iOSValue></iOSValue>
   </key>
   
@@ -27,6 +33,18 @@
   <key name="]">
     <DroidValue>72</DroidValue>
     <WindowsValue>221</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="[">
+    <DroidValue>71</DroidValue>
+    <WindowsValue>219</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="-">
+    <DroidValue>69</DroidValue>
+    <WindowsValue>189</WindowsValue>
     <iOSValue></iOSValue>
   </key>
     
@@ -348,7 +366,7 @@
   
   <key name="Calculator">
     <DroidValue>210</DroidValue>
-    <WindowsValue>187</WindowsValue>
+    <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
   </key>
  
@@ -380,6 +398,12 @@
   <key name="Computer">
     <DroidValue></DroidValue>
     <WindowsValue>182</WindowsValue>
+    <iOSValue></iOSValue>
+  </key>
+
+  <key name="Control">
+    <DroidValue></DroidValue>
+    <WindowsValue></WindowsValue>
     <iOSValue></iOSValue>
   </key>
   
@@ -1228,8 +1252,8 @@
   </key>
   
   <key name="Right GUI">
-    <DroidValue></DroidValue>
-    <WindowsValue></WindowsValue>
+    <DroidValue>118</DroidValue>
+    <WindowsValue>92</WindowsValue>
     <iOSValue></iOSValue>
   </key>
   

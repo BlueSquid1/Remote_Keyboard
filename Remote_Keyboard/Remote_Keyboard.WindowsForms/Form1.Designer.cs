@@ -30,7 +30,8 @@
         {
             this.keyTest = new System.Windows.Forms.Button();
             this.StartListerning = new System.Windows.Forms.Button();
-            this.testKey = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Connect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // keyTest
@@ -53,28 +54,39 @@
             this.StartListerning.UseVisualStyleBackColor = true;
             this.StartListerning.Click += new System.EventHandler(this.StartListerning_Click);
             // 
-            // testKey
+            // textBox1
             // 
-            this.testKey.Location = new System.Drawing.Point(95, 164);
-            this.testKey.Name = "testKey";
-            this.testKey.Size = new System.Drawing.Size(75, 23);
-            this.testKey.TabIndex = 2;
-            this.testKey.Text = "test key";
-            this.testKey.UseVisualStyleBackColor = true;
-            this.testKey.Click += new System.EventHandler(this.testKey_Click);
+            this.textBox1.Location = new System.Drawing.Point(187, 210);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // Connect
+            // 
+            this.Connect.Location = new System.Drawing.Point(95, 206);
+            this.Connect.Name = "Connect";
+            this.Connect.Size = new System.Drawing.Size(75, 23);
+            this.Connect.TabIndex = 4;
+            this.Connect.Text = "Connect";
+            this.Connect.UseVisualStyleBackColor = true;
+            this.Connect.Click += new System.EventHandler(this.Connect_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.testKey);
+            this.ClientSize = new System.Drawing.Size(370, 261);
+            this.Controls.Add(this.Connect);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.StartListerning);
             this.Controls.Add(this.keyTest);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -82,7 +94,8 @@
 
         private System.Windows.Forms.Button keyTest;
         private System.Windows.Forms.Button StartListerning;
-        private System.Windows.Forms.Button testKey;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button Connect;
     }
 }
 

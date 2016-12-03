@@ -9,11 +9,17 @@ namespace Remote_Keyboard.Events
         protected NativeKeyMapper keyMapper;
 
         //constructor
-        public EventManager()
+        public EventManager(PlateformID plateform)
         {
-
+            this.keyMapper = new NativeKeyMapper(plateform);
         }
 
         public abstract void TriggerKeyPress(string sdlKey, bool isPressed);
+
+
+        public string NativeKeyToSdl(ushort nativeKey)
+        {
+            return keyMapper.NativeKeyToSdl(nativeKey);
+        }
     }
 }
