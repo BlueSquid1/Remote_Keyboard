@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets; //for UdpClient
 using System.Net; //for IPEndPoint
+using System.Timers; //for broadcast events
 
 
 /*
@@ -30,7 +31,9 @@ namespace Remote_Keyboard
 
         private UdpClient udpConnection;
         private int portNum;
-        public string TargetIP { get; set; }
+        //public string TargetIP { get; set; }
+        private Timer brdcstTmr;
+        private string brdcstMsg;
 
         //factory method
         public static BaseStation GetInstance(int portNum)
@@ -48,14 +51,33 @@ namespace Remote_Keyboard
         //constructor
         private BaseStation( int portNum )
         {
+            int timeIntrvlMilliSec = 1000;
             this.portNum = portNum;
             this.udpConnection = new UdpClient(portNum);
+            StartBroadcasting(timeIntrvlMilliSec);
+            StartingListeningAsync();
         }
 
         //deconstructor
         ~BaseStation()
         {
             this.udpConnection.Close();
+        }
+
+        private void StartBroadcasting(int timeIntrvlMilliSec)
+        {
+            //populate broadcast message
+            this.brdcstMsg = XMLParser.SerializeKeyPress("is anyone there?");
+            //setup reoccuring broadcast
+            this.brdcstTmr = new Timer( );
+            this.brdcstTmr.Interval = timeIntrvlMilliSec;
+            this.brdcstTmr.Elapsed += new ElapsedEventHandler(BroadCastEvent);
+            this.brdcstTmr.Start();
+        }
+
+        private void BroadCastEvent(object sender, ElapsedEventArgs e)
+        {
+            this.SendBroadcastAsync(this.brdcstMsg);
         }
 
         //non-blocking
@@ -65,7 +87,7 @@ namespace Remote_Keyboard
             {
                 UdpReceiveResult result = await this.udpConnection.ReceiveAsync();
                 string message = Encoding.ASCII.GetString(result.Buffer);
-                Console.WriteLine(message);
+                Console.WriteLine("Received =" + message);
             }
         }
 
@@ -80,14 +102,9 @@ namespace Remote_Keyboard
         }
 
         //non-blocking
-        public async void SendMessageAsync(string message)
+        public async void SendMessageAsync(string targetIP, string message)
         {
-            if(TargetIP == null)
-            {
-                Console.WriteLine("no target address to send to");
-                return;
-            }
-            IPAddress ipAdress = IPAddress.Parse(TargetIP);
+            IPAddress ipAdress = IPAddress.Parse(targetIP);
             IPEndPoint endPoint = new IPEndPoint(ipAdress, this.portNum);
             byte[] datagram = Encoding.ASCII.GetBytes(message);
 

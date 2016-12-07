@@ -5,17 +5,17 @@ using System.Text;
 
 namespace Remote_Keyboard.Common
 {
-    class TransmitState
+    class AirKeyboard
     {
         private EventManager eventManager;
         private BaseStation baseStation;
 
-        public TransmitState(EventManager mEventManager, BaseStation mBaseStation)
+        //constructor
+        public AirKeyboard(EventManager evntManager)
         {
-            //int portNum = 10000;
-            this.eventManager = mEventManager;
-            this.baseStation = mBaseStation;
-            //this.baseStation.TargetIP = "192.168.1.100";
+            int portNum = 10000;
+            this.eventManager = evntManager;
+            this.baseStation = BaseStation.GetInstance(portNum);
         }
 
         public void SendKey(ushort nativeKey, bool isPressed)
@@ -24,7 +24,7 @@ namespace Remote_Keyboard.Common
 
             KeyMessage msg = new KeyMessage { sdlKeyValue = sdlValue, isPressed = true };
             string message = XMLParser.SerializeKeyPress(msg);
-            baseStation.SendMessageAsync(message);
+            //baseStation.SendMessageAsync(message);
             Console.WriteLine(msg.sdlKeyValue);
         }
     }

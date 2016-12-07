@@ -28,113 +28,174 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.IPTxtBx = new System.Windows.Forms.TextBox();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.inputTab = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.SettingsTab = new System.Windows.Forms.TabPage();
+            this.chkBtnkeyboard = new System.Windows.Forms.CheckBox();
+            this.chkBtnServer = new System.Windows.Forms.CheckBox();
+            this.ClientTab = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ConnectBtn = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.KeyCaptureBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ServerTab = new System.Windows.Forms.TabPage();
+            this.tabControl.SuspendLayout();
+            this.inputTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SettingsTab.SuspendLayout();
+            this.ClientTab.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // IPTxtBx
+            // tabControl
             // 
-            this.IPTxtBx.Location = new System.Drawing.Point(115, 37);
-            this.IPTxtBx.Name = "IPTxtBx";
-            this.IPTxtBx.Size = new System.Drawing.Size(100, 20);
-            this.IPTxtBx.TabIndex = 3;
+            this.tabControl.Controls.Add(this.inputTab);
+            this.tabControl.Controls.Add(this.SettingsTab);
+            this.tabControl.Controls.Add(this.ClientTab);
+            this.tabControl.Controls.Add(this.ServerTab);
+            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(568, 317);
+            this.tabControl.TabIndex = 5;
+            // 
+            // inputTab
+            // 
+            this.inputTab.Controls.Add(this.pictureBox1);
+            this.inputTab.Location = new System.Drawing.Point(4, 22);
+            this.inputTab.Name = "inputTab";
+            this.inputTab.Padding = new System.Windows.Forms.Padding(3);
+            this.inputTab.Size = new System.Drawing.Size(560, 291);
+            this.inputTab.TabIndex = 0;
+            this.inputTab.Text = "Input";
+            this.inputTab.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(103, 38);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(329, 145);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // SettingsTab
+            // 
+            this.SettingsTab.Controls.Add(this.chkBtnkeyboard);
+            this.SettingsTab.Controls.Add(this.chkBtnServer);
+            this.SettingsTab.Location = new System.Drawing.Point(4, 22);
+            this.SettingsTab.Name = "SettingsTab";
+            this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.SettingsTab.Size = new System.Drawing.Size(560, 291);
+            this.SettingsTab.TabIndex = 1;
+            this.SettingsTab.Text = "Settings";
+            this.SettingsTab.UseVisualStyleBackColor = true;
+            // 
+            // chkBtnkeyboard
+            // 
+            this.chkBtnkeyboard.AutoSize = true;
+            this.chkBtnkeyboard.Checked = true;
+            this.chkBtnkeyboard.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBtnkeyboard.Location = new System.Drawing.Point(29, 51);
+            this.chkBtnkeyboard.Name = "chkBtnkeyboard";
+            this.chkBtnkeyboard.Size = new System.Drawing.Size(155, 17);
+            this.chkBtnkeyboard.TabIndex = 1;
+            this.chkBtnkeyboard.Text = "Enable Keyboard Listerning";
+            this.chkBtnkeyboard.UseVisualStyleBackColor = true;
+            // 
+            // chkBtnServer
+            // 
+            this.chkBtnServer.AutoSize = true;
+            this.chkBtnServer.Checked = true;
+            this.chkBtnServer.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBtnServer.Location = new System.Drawing.Point(29, 27);
+            this.chkBtnServer.Name = "chkBtnServer";
+            this.chkBtnServer.Size = new System.Drawing.Size(150, 17);
+            this.chkBtnServer.TabIndex = 0;
+            this.chkBtnServer.Text = "Enable Network Listerning";
+            this.chkBtnServer.UseVisualStyleBackColor = true;
+            // 
+            // ClientTab
+            // 
+            this.ClientTab.Controls.Add(this.groupBox1);
+            this.ClientTab.Location = new System.Drawing.Point(4, 22);
+            this.ClientTab.Name = "ClientTab";
+            this.ClientTab.Size = new System.Drawing.Size(560, 291);
+            this.ClientTab.TabIndex = 2;
+            this.ClientTab.Text = "Client";
+            this.ClientTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ConnectBtn);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Location = new System.Drawing.Point(102, 16);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(323, 60);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Direct Connect";
             // 
             // ConnectBtn
             // 
-            this.ConnectBtn.Location = new System.Drawing.Point(34, 37);
+            this.ConnectBtn.Location = new System.Drawing.Point(200, 19);
             this.ConnectBtn.Name = "ConnectBtn";
             this.ConnectBtn.Size = new System.Drawing.Size(75, 23);
-            this.ConnectBtn.TabIndex = 4;
+            this.ConnectBtn.TabIndex = 1;
             this.ConnectBtn.Text = "Connect";
             this.ConnectBtn.UseVisualStyleBackColor = true;
-            this.ConnectBtn.Click += new System.EventHandler(this.Connect_Click);
+            this.ConnectBtn.Click += new System.EventHandler(this.DirectConnect);
             // 
-            // tabControl1
+            // textBox1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(568, 317);
-            this.tabControl1.TabIndex = 5;
+            this.textBox1.Location = new System.Drawing.Point(54, 21);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(140, 20);
+            this.textBox1.TabIndex = 0;
             // 
-            // tabPage1
+            // ServerTab
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(560, 291);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.KeyCaptureBtn);
-            this.tabPage2.Controls.Add(this.ConnectBtn);
-            this.tabPage2.Controls.Add(this.IPTxtBx);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(560, 291);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // KeyCaptureBtn
-            // 
-            this.KeyCaptureBtn.Location = new System.Drawing.Point(140, 94);
-            this.KeyCaptureBtn.Name = "KeyCaptureBtn";
-            this.KeyCaptureBtn.Size = new System.Drawing.Size(75, 23);
-            this.KeyCaptureBtn.TabIndex = 5;
-            this.KeyCaptureBtn.Text = "Start";
-            this.KeyCaptureBtn.UseVisualStyleBackColor = true;
-            this.KeyCaptureBtn.Click += new System.EventHandler(this.KeyCaptureBtn_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Enable Key Capture";
+            this.ServerTab.Location = new System.Drawing.Point(4, 22);
+            this.ServerTab.Name = "ServerTab";
+            this.ServerTab.Size = new System.Drawing.Size(560, 291);
+            this.ServerTab.TabIndex = 3;
+            this.ServerTab.Text = "Server";
+            this.ServerTab.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 341);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl);
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabControl.ResumeLayout(false);
+            this.inputTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.SettingsTab.ResumeLayout(false);
+            this.SettingsTab.PerformLayout();
+            this.ClientTab.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox IPTxtBx;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage inputTab;
+        private System.Windows.Forms.TabPage SettingsTab;
+        private System.Windows.Forms.CheckBox chkBtnServer;
+        private System.Windows.Forms.TabPage ClientTab;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button ConnectBtn;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button KeyCaptureBtn;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage ServerTab;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox chkBtnkeyboard;
     }
 }
 

@@ -16,53 +16,39 @@ namespace Remote_Keyboard.WindowsForms
 {
     public partial class Form1 : Form
     {
-        private TransmitState transmitState;
-        private bool keyboardCapture;
-
-
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
 
+        private AirKeyboard airKeyboard;
 
         public Form1()
         {
-            this.keyboardCapture = false;
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             EventManagerWin eventManager = new EventManagerWin();
-            BaseStation baseStation = BaseStation.GetInstance(10000);
-            transmitState = new TransmitState(eventManager, baseStation);
+            airKeyboard = new AirKeyboard(eventManager);
         }
 
-        private void keyTest_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine("got here");
-            BaseStation baseStation = BaseStation.GetInstance(10000);
-            baseStation.SendBroadcastAsync("hello world");
-        }
-
-        private void StartListerning_Click(object sender, EventArgs e)
-        {
-            BaseStation baseStation = BaseStation.GetInstance(10000);
-            baseStation.StartingListeningAsync();
-        }
-
-        private void Connect_Click(object sender, EventArgs e)
+        private void DirectConnect(object sender, EventArgs e)
         {
 
             //if sucessful enable keyboard capture
         }
 
+        //upboard down event
         private void KeyDownEvent(object sender, KeyEventArgs e)
         {
-            if( this.keyboardCapture )
+            ushort keyValue = PreProcessKeyEvent(e);
+
+            bool keybroadLstn = chkBtnkeyboard.Checked;
+            string curTabName = tabControl.SelectedTab.Name;
+            if (keybroadLstn && curTabName == "inputTab")
             {
-                ushort keyValue = PreProcessKeyEvent(e);
                 bool isPressed = true;
-                transmitState.SendKey(keyValue, isPressed);
+                airKeyboard.SendKey(keyValue, isPressed);
             }
         }
 
@@ -93,12 +79,6 @@ namespace Remote_Keyboard.WindowsForms
                 }
             }
             return keyValue;
-        }
-
-        private void KeyCaptureBtn_Click(object sender, EventArgs e)
-        {
-            //check if connection has been established
-            this.keyboardCapture = true;
         }
     }
 }
