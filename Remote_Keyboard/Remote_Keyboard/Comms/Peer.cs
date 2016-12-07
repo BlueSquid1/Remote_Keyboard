@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace Remote_Keyboard.Comms
@@ -7,11 +8,11 @@ namespace Remote_Keyboard.Comms
     class Peer
     {
         //IP address of the this peer
-        string thisPeerIPAddress;
+        public IPAddress thisPeerIPAddress { get; }
         //whether this peer will accept keystrokes
-        bool acceptSendKeyStrokes;
+        public bool acceptSendKeyStrokes { get; set;}
 
-        Peer(string mAddressIP, bool mSendKeyStorkes = true)
+        public Peer(IPAddress mAddressIP, bool mSendKeyStorkes = true)
         {
             this.thisPeerIPAddress = mAddressIP;
             this.acceptSendKeyStrokes = mSendKeyStorkes;

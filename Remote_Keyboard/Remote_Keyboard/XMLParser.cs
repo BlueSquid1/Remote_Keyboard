@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace Remote_Keyboard
 {
+    [Serializable]
     public class KeyMessage
     {
         public string sdlKeyValue { get; set; }
@@ -15,7 +16,8 @@ namespace Remote_Keyboard
 
     public class XMLParser
     {
-        public static string SerializeString(object obj)
+        /*
+        public static string SerializeObj(object obj)
         {
             StringWriter stringwriter = new StringWriter();
             XmlSerializer serializer = new XmlSerializer(obj.GetType());
@@ -23,13 +25,13 @@ namespace Remote_Keyboard
             return stringwriter.ToString();
         }
 
-        public static object DeserializeString(string msg)
+        public static object DeserializeToObj(string msg)
         {
             var stringReader = new System.IO.StringReader(msg);
             var serializer = new XmlSerializer(typeof(object));
             return serializer.Deserialize(stringReader) as object;
         }
-
+        */
 
 
         public static string SerializeKeyPress(KeyMessage keyMsg)

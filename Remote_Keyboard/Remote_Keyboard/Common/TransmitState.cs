@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Remote_Keyboard.Comms;
 
 namespace Remote_Keyboard.Common
 {
@@ -13,7 +14,7 @@ namespace Remote_Keyboard.Common
         //constructor
         public AirKeyboard(EventManager evntManager)
         {
-            int portNum = 10000;
+            int portNum = 10010;
             this.eventManager = evntManager;
             this.baseStation = BaseStation.GetInstance(portNum);
         }
