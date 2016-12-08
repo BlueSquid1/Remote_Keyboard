@@ -1,40 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Serialization;
 
 namespace Remote_Keyboard
 {
-    [Serializable]
-    public class KeyMessage
-    {
-        public string sdlKeyValue { get; set; }
-        public bool isPressed { get; set; }
-    }
-
     public class XMLParser
     {
-        /*
-        public static string SerializeObj(object obj)
-        {
-            StringWriter stringwriter = new StringWriter();
-            XmlSerializer serializer = new XmlSerializer(obj.GetType());
-            serializer.Serialize(stringwriter, obj);
-            return stringwriter.ToString();
-        }
-
-        public static object DeserializeToObj(string msg)
-        {
-            var stringReader = new System.IO.StringReader(msg);
-            var serializer = new XmlSerializer(typeof(object));
-            return serializer.Deserialize(stringReader) as object;
-        }
-        */
-
-
-        public static string SerializeKeyPress(KeyMessage keyMsg)
+        public static string SerializeObject<T>(T keyMsg)
         {
             StringWriter stringwriter = new StringWriter();
             XmlSerializer serializer = new XmlSerializer(keyMsg.GetType());
@@ -42,11 +13,11 @@ namespace Remote_Keyboard
             return stringwriter.ToString();
         }
 
-        public static KeyMessage DeserializeKeyPress(string msg)
+        public static T DeserializeObject<T>(string msg)
         {
-            var stringReader = new System.IO.StringReader(msg);
-            var serializer = new XmlSerializer(typeof(KeyMessage));
-            return serializer.Deserialize(stringReader) as KeyMessage;
+            var stringReader = new StringReader(msg);
+            var serializer = new XmlSerializer(typeof(T));
+            return (T)serializer.Deserialize(stringReader);
         }
     }
 }

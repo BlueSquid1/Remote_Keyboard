@@ -1,6 +1,4 @@
-﻿#if !WINDOWS_UWP
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets; //for UdpClient
@@ -32,13 +30,12 @@ namespace Remote_Keyboard.Comms
 
         private UdpClient udpConnection;
         private int portNum;
-        //public string TargetIP { get; set; }
         private Timer brdcstTmr;
         private string brdcstMsg;
 
         //stores other peers on the network
-        private List<Peer> peers;
-        private IPAddress thisPeerIPAddress;
+        private List<PeerMsg> peers;
+        private PeerMsg thisPeer;
 
         //factory method
         public static BaseStation GetInstance(int portNum)
@@ -54,15 +51,13 @@ namespace Remote_Keyboard.Comms
         }
 
         //constructor
-        private BaseStation( int portNum )
+        private BaseStation( int mPortNum)
         {
+            InitializeVariables(mPortNum);
+
             int timeIntrvlMilliSec = 3000;
-            this.peers = new List<Peer>();
-            this.portNum = portNum;
-            this.udpConnection = new UdpClient(portNum);
-            thisPeerIPAddress = this.LocalIPAddress();
-            StartBroadcasting(timeIntrvlMilliSec);
             StartingListeningAsync();
+            StartBroadcasting(timeIntrvlMilliSec);
         }
 
         //deconstructor
@@ -71,10 +66,20 @@ namespace Remote_Keyboard.Comms
             this.udpConnection.Close();
         }
 
+        private void InitializeVariables(int mPortNum)
+        {
+            this.peers = new List<PeerMsg>();
+            this.portNum = mPortNum;
+            this.udpConnection = new UdpClient(portNum);
+            this.thisPeer = new PeerMsg { thisPeerIPAddress = this.GetLocalIPAddress().ToString(), acceptSendKeyStrokes = true };
+
+        }
+
         private void StartBroadcasting(int timeIntrvlMilliSec)
         {
             //populate broadcast message
-            this.brdcstMsg = "hello";
+            this.brdcstMsg = XMLParser.SerializeObject(this.thisPeer);
+            PeerMsg temp = XMLParser.DeserializeObject<PeerMsg>(brdcstMsg);
             //setup reoccuring broadcast
             this.brdcstTmr = new Timer( );
             this.brdcstTmr.Interval = timeIntrvlMilliSec;
@@ -92,14 +97,18 @@ namespace Remote_Keyboard.Comms
         {
             while (true)
             {
+                //read received message
                 UdpReceiveResult result = await this.udpConnection.ReceiveAsync();
                 string message = Encoding.ASCII.GetString(result.Buffer);
                 IPAddress senderAddress = result.RemoteEndPoint.Address;
-                bool fromThisPeer = IPAddress.Equals(senderAddress, this.thisPeerIPAddress);
-                if (fromThisPeer == false && !IsIpAddressKnown(senderAddress))
+
+
+                bool fromThisPeer = string.Equals(senderAddress.ToString(), this.thisPeer.thisPeerIPAddress);
+                bool fromExistingPeer = !IsIpAddressKnown(senderAddress);
+                if (fromThisPeer == false && fromExistingPeer)
                 {
-                    peers.Add(new Peer(senderAddress, true));
-                    Console.WriteLine("Connected to peer = " + senderAddress);
+                    peers.Add(new PeerMsg { thisPeerIPAddress = senderAddress.ToString(), acceptSendKeyStrokes = true });
+                    Console.WriteLine("Connected to peer = " + senderAddress.ToString());
                 }
             }
         }
@@ -115,10 +124,9 @@ namespace Remote_Keyboard.Comms
         }
 
         //non-blocking
-        public async void SendMessageAsync(string targetIP, string message)
+        public async void SendMessageAsync(IPAddress ipAddress, string message)
         {
-            IPAddress ipAdress = IPAddress.Parse(targetIP);
-            IPEndPoint endPoint = new IPEndPoint(ipAdress, this.portNum);
+            IPEndPoint endPoint = new IPEndPoint(ipAddress, this.portNum);
             byte[] datagram = Encoding.ASCII.GetBytes(message);
 
             await udpConnection.SendAsync(datagram, datagram.Length, endPoint);
@@ -126,9 +134,9 @@ namespace Remote_Keyboard.Comms
 
         private bool IsIpAddressKnown(IPAddress testIp)
         {
-            foreach(Peer curPeer in peers)
+            foreach(PeerMsg curPeer in peers)
             {
-                if(IPAddress.Equals(curPeer.thisPeerIPAddress, testIp))
+                if(PeerMsg.Equals(curPeer.thisPeerIPAddress, testIp))
                 {
                     return true;
                 }
@@ -136,7 +144,7 @@ namespace Remote_Keyboard.Comms
             return false;
         }
 
-        private IPAddress LocalIPAddress()
+        private IPAddress GetLocalIPAddress()
         {
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
 
@@ -146,5 +154,3 @@ namespace Remote_Keyboard.Comms
         }
     }
 }
-
-#endif

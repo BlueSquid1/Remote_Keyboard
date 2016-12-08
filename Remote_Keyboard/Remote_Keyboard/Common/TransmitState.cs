@@ -23,10 +23,13 @@ namespace Remote_Keyboard.Common
         {
             string sdlValue = eventManager.NativeKeyToSdl(nativeKey);
 
-            KeyMessage msg = new KeyMessage { sdlKeyValue = sdlValue, isPressed = true };
-            string message = XMLParser.SerializeKeyPress(msg);
+            PeerMsg msg = new PeerMsg { keyStrokeSDL = sdlValue, isPressed = true };
+            string message = XMLParser.SerializeObject(msg);
+            PeerMsg temp = XMLParser.DeserializeObject<PeerMsg>(message);
+
+            //send message to all connected peers
             //baseStation.SendMessageAsync(message);
-            Console.WriteLine(msg.sdlKeyValue);
+            Console.WriteLine(message);
         }
     }
 }
