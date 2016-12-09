@@ -10,9 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Settings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\TransmitState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\AirKeyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\BaseStation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\PeerMsg.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comms\PeerUpdateEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\EventManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\KeyCodes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\NativeKeyMapper.cs" />
@@ -24,5 +25,10 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)KeyMapping.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Icos\linux_icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Icos\mac_icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Icos\Windows_icon.png" />
   </ItemGroup>
 </Project>

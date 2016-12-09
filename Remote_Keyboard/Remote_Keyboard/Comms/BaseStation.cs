@@ -37,6 +37,9 @@ namespace Remote_Keyboard.Comms
         private List<PeerMsg> peers;
         private PeerMsg thisPeer;
 
+        //peer change event
+        public event EventHandler<PeerUpdateEventArgs> PeerChanged;
+
         //factory method
         public static BaseStation GetInstance(int portNum)
         {
@@ -71,7 +74,7 @@ namespace Remote_Keyboard.Comms
             this.peers = new List<PeerMsg>();
             this.portNum = mPortNum;
             this.udpConnection = new UdpClient(portNum);
-            this.thisPeer = new PeerMsg { thisPeerIPAddress = this.GetLocalIPAddress().ToString(), acceptSendKeyStrokes = true };
+            this.thisPeer = new PeerMsg { thisPeerIPAddress = this.GetLocalIPAddress().ToString(), acceptSendKeyStrokes = true, thisOS = OSValue.Windows10 };
 
         }
 
@@ -100,15 +103,17 @@ namespace Remote_Keyboard.Comms
                 //read received message
                 UdpReceiveResult result = await this.udpConnection.ReceiveAsync();
                 string message = Encoding.ASCII.GetString(result.Buffer);
-                IPAddress senderAddress = result.RemoteEndPoint.Address;
+                //IPAddress senderAddress = result.RemoteEndPoint.Address;
+                PeerMsg peerMsgRciv = XMLParser.DeserializeObject<PeerMsg>(message);
 
-
-                bool fromThisPeer = string.Equals(senderAddress.ToString(), this.thisPeer.thisPeerIPAddress);
-                bool fromExistingPeer = !IsIpAddressKnown(senderAddress);
-                if (fromThisPeer == false && fromExistingPeer)
+                bool fromThisPeer = string.Equals(peerMsgRciv.thisPeerIPAddress, this.thisPeer.thisPeerIPAddress);
+                bool fromExistingPeer = IsIpAddressKnown(peerMsgRciv.thisPeerIPAddress);
+                if (!fromThisPeer && !fromExistingPeer)
                 {
-                    peers.Add(new PeerMsg { thisPeerIPAddress = senderAddress.ToString(), acceptSendKeyStrokes = true });
-                    Console.WriteLine("Connected to peer = " + senderAddress.ToString());
+                    peers.Add(peerMsgRciv);
+
+                    //send out a broadcast to all subscribers
+                    PeerChanged?.Invoke(this, new PeerUpdateEventArgs(peers));
                 }
             }
         }
@@ -132,11 +137,11 @@ namespace Remote_Keyboard.Comms
             await udpConnection.SendAsync(datagram, datagram.Length, endPoint);
         }
 
-        private bool IsIpAddressKnown(IPAddress testIp)
+        private bool IsIpAddressKnown(String testIp)
         {
             foreach(PeerMsg curPeer in peers)
             {
-                if(PeerMsg.Equals(curPeer.thisPeerIPAddress, testIp))
+                if(string.Equals(curPeer.thisPeerIPAddress, testIp))
                 {
                     return true;
                 }

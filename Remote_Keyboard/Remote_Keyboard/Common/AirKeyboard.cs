@@ -11,12 +11,22 @@ namespace Remote_Keyboard.Common
         private EventManager eventManager;
         private BaseStation baseStation;
 
+        public event EventHandler<PeerUpdateEventArgs> PeerChanged;
+
+
         //constructor
         public AirKeyboard(EventManager evntManager)
         {
             int portNum = 10010;
             this.eventManager = evntManager;
             this.baseStation = BaseStation.GetInstance(portNum);
+            baseStation.PeerChanged += BaseStation_PeerChanged;
+
+        }
+
+        private void BaseStation_PeerChanged(object sender, PeerUpdateEventArgs e)
+        {
+            this.PeerChanged?.Invoke(sender, e);
         }
 
         public void SendKey(ushort nativeKey, bool isPressed)

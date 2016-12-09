@@ -10,7 +10,8 @@ namespace Remote_Keyboard
             StringWriter stringwriter = new StringWriter();
             XmlSerializer serializer = new XmlSerializer(keyMsg.GetType());
             serializer.Serialize(stringwriter, keyMsg);
-            return stringwriter.ToString();
+            string outputMsg = stringwriter.ToString();
+            return outputMsg;
         }
 
         public static T DeserializeObject<T>(string msg)

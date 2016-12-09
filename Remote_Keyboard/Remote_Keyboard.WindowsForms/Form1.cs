@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Remote_Keyboard;
 using Remote_Keyboard.Common;
 using System.Runtime.InteropServices;
+using Remote_Keyboard.Comms;
 
 namespace Remote_Keyboard.WindowsForms
 {
@@ -30,6 +31,20 @@ namespace Remote_Keyboard.WindowsForms
         {
             EventManagerWin eventManager = new EventManagerWin();
             airKeyboard = new AirKeyboard(eventManager);
+            airKeyboard.PeerChanged += AirKeyboard_PeerChanged;
+        }
+
+        private void AirKeyboard_PeerChanged(object sender, PeerUpdateEventArgs e)
+        {
+            //update view list
+            peerListView.Items.Clear();
+            foreach ( PeerMsg peer in e.peers )
+            {
+                string[] peerDtl = { peer.thisPeerIPAddress };
+                int OSIndex = (int)peer.thisOS;
+                ListViewItem item = new ListViewItem(peerDtl, imgListOS.Images.Keys[OSIndex]);
+                peerListView.Items.Add(item);
+            }
         }
 
         private void DirectConnect(object sender, EventArgs e)
