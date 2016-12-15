@@ -20,25 +20,37 @@ namespace Remote_Keyboard.Common
             int portNum = 10010;
             this.eventManager = evntManager;
             this.baseStation = BaseStation.GetInstance(portNum);
-            baseStation.PeerChanged += BaseStation_PeerChanged;
-
+            baseStation.PeerChanged += BaseStationPeerChanged;
+            baseStation.KeyStrokeReceived += BaseStationKeyStrokeReceived;
         }
 
-        private void BaseStation_PeerChanged(object sender, PeerUpdateEventArgs e)
+        private void BaseStationKeyStrokeReceived(object sender, KeyStrokeEventArgs e)
+        {
+            string sdlValue = e.keyStrkMsg.keyStrokeSDL;
+            bool isPressed = e.keyStrkMsg.isPressed;
+            eventManager.TriggerKeyPress(e.keyStrkMsg.keyStrokeSDL, isPressed);
+        }
+
+        private void BaseStationPeerChanged(object sender, PeerUpdateEventArgs e)
         {
             this.PeerChanged?.Invoke(sender, e);
         }
 
+
+
+        //connect with native keyboard
         public void SendKey(ushort nativeKey, bool isPressed)
         {
+            //convert to an SDL value
             string sdlValue = eventManager.NativeKeyToSdl(nativeKey);
 
-            PeerMsg msg = new PeerMsg { keyStrokeSDL = sdlValue, isPressed = true };
+            KeyStrokeMsg msg = new KeyStrokeMsg {
+                keyStrokeSDL = sdlValue,
+                isPressed = isPressed,
+            };
             string message = XMLParser.SerializeObject(msg);
-            PeerMsg temp = XMLParser.DeserializeObject<PeerMsg>(message);
+            baseStation.SendKeyStrokeToPeers(message);
 
-            //send message to all connected peers
-            //baseStation.SendMessageAsync(message);
             Console.WriteLine(message);
         }
     }

@@ -36,29 +36,28 @@
             this.SettingsTab = new System.Windows.Forms.TabPage();
             this.chkBtnkeyboard = new System.Windows.Forms.CheckBox();
             this.chkBtnServer = new System.Windows.Forms.CheckBox();
-            this.ClientTab = new System.Windows.Forms.TabPage();
+            this.PeersTab = new System.Windows.Forms.TabPage();
             this.peerListView = new System.Windows.Forms.ListView();
             this.ipAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.active = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imgListOS = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ConnectBtn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.ServerTab = new System.Windows.Forms.TabPage();
-            this.imgListOS = new System.Windows.Forms.ImageList(this.components);
+            this.AcceptInput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl.SuspendLayout();
             this.inputTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SettingsTab.SuspendLayout();
-            this.ClientTab.SuspendLayout();
+            this.PeersTab.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.inputTab);
+            this.tabControl.Controls.Add(this.PeersTab);
             this.tabControl.Controls.Add(this.SettingsTab);
-            this.tabControl.Controls.Add(this.ClientTab);
-            this.tabControl.Controls.Add(this.ServerTab);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -120,28 +119,29 @@
             this.chkBtnServer.Text = "Enable Network Listerning";
             this.chkBtnServer.UseVisualStyleBackColor = true;
             // 
-            // ClientTab
+            // PeersTab
             // 
-            this.ClientTab.Controls.Add(this.peerListView);
-            this.ClientTab.Controls.Add(this.groupBox1);
-            this.ClientTab.Location = new System.Drawing.Point(4, 22);
-            this.ClientTab.Name = "ClientTab";
-            this.ClientTab.Size = new System.Drawing.Size(560, 291);
-            this.ClientTab.TabIndex = 2;
-            this.ClientTab.Text = "Client";
-            this.ClientTab.UseVisualStyleBackColor = true;
+            this.PeersTab.Controls.Add(this.peerListView);
+            this.PeersTab.Controls.Add(this.groupBox1);
+            this.PeersTab.Location = new System.Drawing.Point(4, 22);
+            this.PeersTab.Name = "PeersTab";
+            this.PeersTab.Size = new System.Drawing.Size(560, 291);
+            this.PeersTab.TabIndex = 2;
+            this.PeersTab.Text = "Peers";
+            this.PeersTab.UseVisualStyleBackColor = true;
             // 
             // peerListView
             // 
             this.peerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ipAddress,
-            this.active});
+            this.AcceptInput,
+            this.status});
             this.peerListView.FullRowSelect = true;
             this.peerListView.GridLines = true;
             this.peerListView.LargeImageList = this.imgListOS;
             this.peerListView.Location = new System.Drawing.Point(102, 99);
             this.peerListView.Name = "peerListView";
-            this.peerListView.Size = new System.Drawing.Size(323, 143);
+            this.peerListView.Size = new System.Drawing.Size(384, 143);
             this.peerListView.SmallImageList = this.imgListOS;
             this.peerListView.TabIndex = 4;
             this.peerListView.UseCompatibleStateImageBehavior = false;
@@ -152,9 +152,17 @@
             this.ipAddress.Text = "IP Address";
             this.ipAddress.Width = 150;
             // 
-            // active
+            // status
             // 
-            this.active.Text = "Active";
+            this.status.Text = "Status";
+            // 
+            // imgListOS
+            // 
+            this.imgListOS.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListOS.ImageStream")));
+            this.imgListOS.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgListOS.Images.SetKeyName(0, "Windows_icon.png");
+            this.imgListOS.Images.SetKeyName(1, "mac_icon.png");
+            this.imgListOS.Images.SetKeyName(2, "linux_icon.png");
             // 
             // groupBox1
             // 
@@ -184,22 +192,10 @@
             this.textBox1.Size = new System.Drawing.Size(140, 20);
             this.textBox1.TabIndex = 0;
             // 
-            // ServerTab
+            // AcceptInput
             // 
-            this.ServerTab.Location = new System.Drawing.Point(4, 22);
-            this.ServerTab.Name = "ServerTab";
-            this.ServerTab.Size = new System.Drawing.Size(560, 291);
-            this.ServerTab.TabIndex = 3;
-            this.ServerTab.Text = "Server";
-            this.ServerTab.UseVisualStyleBackColor = true;
-            // 
-            // imgListOS
-            // 
-            this.imgListOS.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListOS.ImageStream")));
-            this.imgListOS.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListOS.Images.SetKeyName(0, "Windows_icon.png");
-            this.imgListOS.Images.SetKeyName(1, "mac_icon.png");
-            this.imgListOS.Images.SetKeyName(2, "linux_icon.png");
+            this.AcceptInput.Text = "Accept Input";
+            this.AcceptInput.Width = 88;
             // 
             // Form1
             // 
@@ -212,12 +208,13 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUpEvent);
             this.tabControl.ResumeLayout(false);
             this.inputTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.SettingsTab.ResumeLayout(false);
             this.SettingsTab.PerformLayout();
-            this.ClientTab.ResumeLayout(false);
+            this.PeersTab.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -229,17 +226,17 @@
         private System.Windows.Forms.TabPage inputTab;
         private System.Windows.Forms.TabPage SettingsTab;
         private System.Windows.Forms.CheckBox chkBtnServer;
-        private System.Windows.Forms.TabPage ClientTab;
+        private System.Windows.Forms.TabPage PeersTab;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button ConnectBtn;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TabPage ServerTab;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.CheckBox chkBtnkeyboard;
         private System.Windows.Forms.ListView peerListView;
         private System.Windows.Forms.ColumnHeader ipAddress;
-        private System.Windows.Forms.ColumnHeader active;
+        private System.Windows.Forms.ColumnHeader status;
         private System.Windows.Forms.ImageList imgListOS;
+        private System.Windows.Forms.ColumnHeader AcceptInput;
     }
 }
 

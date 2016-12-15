@@ -38,10 +38,14 @@ namespace Remote_Keyboard.WindowsForms
         {
             //update view list
             peerListView.Items.Clear();
-            foreach ( PeerMsg peer in e.peers )
+            foreach ( Peer peer in e.peers )
             {
-                string[] peerDtl = { peer.thisPeerIPAddress };
-                int OSIndex = (int)peer.thisOS;
+                string[] peerDtl = {
+                    peer.lastHeartBeat.senderIpAddress,
+                    peer.lastHeartBeat.acceptKeyStrokes.ToString(),
+
+                };
+                int OSIndex = (int)peer.lastHeartBeat.platform;
                 ListViewItem item = new ListViewItem(peerDtl, imgListOS.Images.Keys[OSIndex]);
                 peerListView.Items.Add(item);
             }
@@ -58,11 +62,24 @@ namespace Remote_Keyboard.WindowsForms
         {
             ushort keyValue = PreProcessKeyEvent(e);
 
+            bool isPressed = true;
+            KeyEvent(keyValue, isPressed);
+        }
+
+        private void KeyUpEvent(object sender, KeyEventArgs e)
+        {
+            ushort keyValue = PreProcessKeyEvent(e);
+
+            bool isPressed = false;
+            KeyEvent(keyValue, isPressed);
+        }
+
+        private void KeyEvent(ushort keyValue, bool isPressed)
+        {
             bool keybroadLstn = chkBtnkeyboard.Checked;
             string curTabName = tabControl.SelectedTab.Name;
             if (keybroadLstn && curTabName == "inputTab")
             {
-                bool isPressed = true;
                 airKeyboard.SendKey(keyValue, isPressed);
             }
         }

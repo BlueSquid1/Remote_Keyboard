@@ -5,6 +5,7 @@ using System.Net.Sockets; //for UdpClient
 using System.Net; //for IPEndPoint
 using System.Timers; //for broadcast events
 using System.Linq;
+using Remote_Keyboard.Common;
 
 
 /*
@@ -32,13 +33,15 @@ namespace Remote_Keyboard.Comms
         private int portNum;
         private Timer brdcstTmr;
         private string brdcstMsg;
+        private double timeOutMilliSec = 10e3;
 
         //stores other peers on the network
-        private List<PeerMsg> peers;
-        private PeerMsg thisPeer;
+        private List<Peer> knownPeers;
+        private HeartBeat myHeartBeat;
 
         //peer change event
         public event EventHandler<PeerUpdateEventArgs> PeerChanged;
+        public event EventHandler<KeyStrokeEventArgs> KeyStrokeReceived;
 
         //factory method
         public static BaseStation GetInstance(int portNum)
@@ -71,18 +74,24 @@ namespace Remote_Keyboard.Comms
 
         private void InitializeVariables(int mPortNum)
         {
-            this.peers = new List<PeerMsg>();
+            this.knownPeers = new List<Peer>();
             this.portNum = mPortNum;
             this.udpConnection = new UdpClient(portNum);
-            this.thisPeer = new PeerMsg { thisPeerIPAddress = this.GetLocalIPAddress().ToString(), acceptSendKeyStrokes = true, thisOS = OSValue.Windows10 };
-
+            this.myHeartBeat = new HeartBeat
+            {
+                senderIpAddress = this.GetLocalIPAddress().ToString(),
+                acceptKeyStrokes = true,
+                acceptCopySync = true,
+                platform = OSValue.Windows10
+            };
         }
 
         private void StartBroadcasting(int timeIntrvlMilliSec)
         {
             //populate broadcast message
-            this.brdcstMsg = XMLParser.SerializeObject(this.thisPeer);
-            PeerMsg temp = XMLParser.DeserializeObject<PeerMsg>(brdcstMsg);
+            this.brdcstMsg = XMLParser.SerializeObject(this.myHeartBeat);
+            //HeartBeat temp = XMLParser.DeserializeObject<HeartBeat>(brdcstMsg);
+            
             //setup reoccuring broadcast
             this.brdcstTmr = new Timer( );
             this.brdcstTmr.Interval = timeIntrvlMilliSec;
@@ -103,23 +112,60 @@ namespace Remote_Keyboard.Comms
                 //read received message
                 UdpReceiveResult result = await this.udpConnection.ReceiveAsync();
                 string message = Encoding.ASCII.GetString(result.Buffer);
-                //IPAddress senderAddress = result.RemoteEndPoint.Address;
-                PeerMsg peerMsgRciv = XMLParser.DeserializeObject<PeerMsg>(message);
+                MessageType objType = XMLParser.GetType(message);
 
-                bool fromThisPeer = string.Equals(peerMsgRciv.thisPeerIPAddress, this.thisPeer.thisPeerIPAddress);
-                bool fromExistingPeer = IsIpAddressKnown(peerMsgRciv.thisPeerIPAddress);
-                if (!fromThisPeer && !fromExistingPeer)
+                switch (objType)
                 {
-                    peers.Add(peerMsgRciv);
+                    case MessageType.HeartBeat:
+                        HeartBeat heartBeatObj = XMLParser.DeserializeObject<HeartBeat>(message);
+                        this.ReceivedHeartBeat(heartBeatObj);
+                        break;
 
-                    //send out a broadcast to all subscribers
-                    PeerChanged?.Invoke(this, new PeerUpdateEventArgs(peers));
+                    case MessageType.KeyStroke:
+                        KeyStrokeMsg keyStrkObj = XMLParser.DeserializeObject<KeyStrokeMsg>(message);
+                        this.RecievedKeyStroke(keyStrkObj);
+                        break;
+
+                    default:
+                        Console.WriteLine("Basestation: unknown object type");
+                        break;
                 }
             }
         }
 
+        private void ReceivedHeartBeat(HeartBeat hrtBtMsg)
+        {
+            //update timer for corresponding peer
+
+            bool fromThisPeer = string.Equals(hrtBtMsg.senderIpAddress, this.myHeartBeat.senderIpAddress);
+            bool fromExistingPeer = IsIpAddressKnown(hrtBtMsg.senderIpAddress);
+            if (!fromThisPeer && !fromExistingPeer)
+            {
+                //new peer
+                Peer latestPeer = new Peer(hrtBtMsg, timeOutMilliSec);
+                latestPeer.aliveTimeout.Elapsed += AliveTimeoutElapsed;
+
+                knownPeers.Add(latestPeer);
+
+                //send out a broadcast to all subscribers
+                PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
+            }
+        }
+
+        private void AliveTimeoutElapsed(object sender, ElapsedEventArgs e)
+        {
+            PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
+        }
+
+        private void RecievedKeyStroke(KeyStrokeMsg kyStrkMsg)
+        {
+            KeyStrokeReceived?.Invoke(this, new KeyStrokeEventArgs(kyStrkMsg));
+        }
+
+
+
         //non-blocking
-        public async void SendBroadcastAsync(string message)
+        private async void SendBroadcastAsync(string message)
         {
             this.udpConnection.EnableBroadcast = true;
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, this.portNum);
@@ -129,19 +175,33 @@ namespace Remote_Keyboard.Comms
         }
 
         //non-blocking
-        public async void SendMessageAsync(IPAddress ipAddress, string message)
+        private async void SendMessageAsync(string ipAddress, string message)
         {
-            IPEndPoint endPoint = new IPEndPoint(ipAddress, this.portNum);
+            IPAddress ipAddressObj = IPAddress.Parse(ipAddress);
+            IPEndPoint endPoint = new IPEndPoint(ipAddressObj, this.portNum);
             byte[] datagram = Encoding.ASCII.GetBytes(message);
 
             await udpConnection.SendAsync(datagram, datagram.Length, endPoint);
         }
 
+        public void SendKeyStrokeToPeers(string message)
+        {
+            foreach(Peer peer in knownPeers)
+            {
+                //only send keystroke to peers that will accept the keystroke
+                if( peer.lastHeartBeat.acceptKeyStrokes)
+                {
+                    string peerIp = peer.lastHeartBeat.senderIpAddress;
+                    this.SendMessageAsync(peerIp, message);
+                }          
+            }
+        }
+
         private bool IsIpAddressKnown(String testIp)
         {
-            foreach(PeerMsg curPeer in peers)
+            foreach(Peer curPeer in knownPeers)
             {
-                if(string.Equals(curPeer.thisPeerIPAddress, testIp))
+                if(string.Equals(curPeer.lastHeartBeat.senderIpAddress, testIp))
                 {
                     return true;
                 }
