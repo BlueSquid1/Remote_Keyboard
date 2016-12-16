@@ -13,6 +13,8 @@ using Remote_Keyboard.Common;
 using System.Runtime.InteropServices;
 using Remote_Keyboard.Comms;
 
+using System.Drawing; //for drawing buttons with text on them
+
 namespace Remote_Keyboard.WindowsForms
 {
     public partial class Form1 : Form
@@ -25,6 +27,7 @@ namespace Remote_Keyboard.WindowsForms
         public Form1()
         {
             InitializeComponent();
+            Rectangle test = new Rectangle(10,10, 50, 50);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,6 +35,18 @@ namespace Remote_Keyboard.WindowsForms
             EventManagerWin eventManager = new EventManagerWin();
             airKeyboard = new AirKeyboard(eventManager);
             airKeyboard.PeerChanged += AirKeyboard_PeerChanged;
+            airKeyboard.KeyLogUpdate += AirKeyboard_KeyLogUpdate;
+
+        }
+
+        private void AirKeyboard_KeyLogUpdate(object sender, Events.KeyLogUpdateEventArgs e)
+        {
+            //print keys pressed down
+            foreach (string sdlKey in e.keysHeldDown)
+            {
+                Console.Write(sdlKey + " ");
+            }
+            Console.WriteLine();
         }
 
         private void AirKeyboard_PeerChanged(object sender, PeerUpdateEventArgs e)

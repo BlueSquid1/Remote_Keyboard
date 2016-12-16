@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4D7141E6-2A9E-4FE4-8863-B0EA38B06496}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Remote_Keyboard.WindowsForms</RootNamespace>
     <AssemblyName>Remote_Keyboard.WindowsForms</AssemblyName>

@@ -11,13 +11,16 @@ namespace Remote_Keyboard.Common
         private EventManager eventManager;
         private BaseStation baseStation;
 
-        public event EventHandler<PeerUpdateEventArgs> PeerChanged;
+        private List<string> keysHeldDown;
 
+        public event EventHandler<PeerUpdateEventArgs> PeerChanged;
+        public event EventHandler<KeyLogUpdateEventArgs> KeyLogUpdate;
 
         //constructor
         public AirKeyboard(EventManager evntManager)
         {
             int portNum = 10010;
+            keysHeldDown = new List<string>();
             this.eventManager = evntManager;
             this.baseStation = BaseStation.GetInstance(portNum);
             baseStation.PeerChanged += BaseStationPeerChanged;
@@ -48,10 +51,46 @@ namespace Remote_Keyboard.Common
                 keyStrokeSDL = sdlValue,
                 isPressed = isPressed,
             };
+
+            //log which keys have been pressed
+            LogKey(sdlValue, isPressed);
+
             string message = XMLParser.SerializeObject(msg);
             baseStation.SendKeyStrokeToPeers(message);
+        }
 
-            Console.WriteLine(message);
+
+        private void LogKey(string sdlValue, bool isPressed)
+        {
+            if (isPressed)
+            {
+                //check if key has already been added
+                this.AddUniqueKey(sdlValue);
+            }
+            else
+            {
+                keysHeldDown.Remove(sdlValue);
+                //broadcast update
+                KeyLogUpdate?.Invoke(this, new KeyLogUpdateEventArgs(keysHeldDown));
+            }
+        }
+
+        private void AddUniqueKey(string sdlValue)
+        {
+            //check if key is already in keysHeldDown list
+            foreach(string heldDownKey in keysHeldDown)
+            {
+                if(heldDownKey == sdlValue)
+                {
+                    //key already in list
+                    return;
+                }
+            }
+            //add the key
+            keysHeldDown.Add(sdlValue);
+
+            //broadcast update
+            KeyLogUpdate?.Invoke(this, new KeyLogUpdateEventArgs(keysHeldDown));
         }
     }
 }
