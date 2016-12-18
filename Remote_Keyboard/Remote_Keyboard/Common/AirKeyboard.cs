@@ -22,7 +22,7 @@ namespace Remote_Keyboard.Common
             int portNum = 10010;
             keysHeldDown = new List<string>();
             this.eventManager = evntManager;
-            this.baseStation = BaseStation.GetInstance(portNum);
+            this.baseStation = new BaseStation();
             baseStation.PeerChanged += BaseStationPeerChanged;
             baseStation.KeyStrokeReceived += BaseStationKeyStrokeReceived;
         }
@@ -56,7 +56,7 @@ namespace Remote_Keyboard.Common
             LogKey(sdlValue, isPressed);
 
             string message = XMLParser.SerializeObject(msg);
-            baseStation.SendKeyStrokeToPeers(message);
+            baseStation.SendMessageToAllPeers(message);
         }
 
 

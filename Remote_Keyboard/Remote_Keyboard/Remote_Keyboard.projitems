@@ -16,7 +16,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Comms\KeyStrokeEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\KeyStrokeMsg.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\IMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comms\MsgReceivedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\Peer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comms\PeerConnection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\PeerUpdateEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\EventManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\KeyCodes.cs" />

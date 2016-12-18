@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.inputTab = new System.Windows.Forms.TabPage();
+            this.btnDisplay = new System.Windows.Forms.Button();
             this.PeersTab = new System.Windows.Forms.TabPage();
             this.peerListView = new System.Windows.Forms.ListView();
             this.ipAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -44,7 +45,8 @@
             this.SettingsTab = new System.Windows.Forms.TabPage();
             this.chkBtnkeyboard = new System.Windows.Forms.CheckBox();
             this.chkBtnServer = new System.Windows.Forms.CheckBox();
-            this.btnDisplay = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.inputTab.SuspendLayout();
             this.PeersTab.SuspendLayout();
@@ -66,6 +68,7 @@
             // 
             // inputTab
             // 
+            this.inputTab.Controls.Add(this.label1);
             this.inputTab.Controls.Add(this.btnDisplay);
             this.inputTab.Location = new System.Drawing.Point(4, 22);
             this.inputTab.Name = "inputTab";
@@ -75,13 +78,23 @@
             this.inputTab.Text = "Input";
             this.inputTab.UseVisualStyleBackColor = true;
             // 
+            // btnDisplay
+            // 
+            this.btnDisplay.Location = new System.Drawing.Point(245, 53);
+            this.btnDisplay.Name = "btnDisplay";
+            this.btnDisplay.Size = new System.Drawing.Size(75, 23);
+            this.btnDisplay.TabIndex = 0;
+            this.btnDisplay.Text = "Display";
+            this.btnDisplay.UseVisualStyleBackColor = true;
+            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
+            // 
             // PeersTab
             // 
             this.PeersTab.Controls.Add(this.peerListView);
             this.PeersTab.Controls.Add(this.groupBox1);
             this.PeersTab.Location = new System.Drawing.Point(4, 22);
             this.PeersTab.Name = "PeersTab";
-            this.PeersTab.Size = new System.Drawing.Size(560, 291);
+            this.PeersTab.Size = new System.Drawing.Size(560, 247);
             this.PeersTab.TabIndex = 2;
             this.PeersTab.Text = "Peers";
             this.PeersTab.UseVisualStyleBackColor = true;
@@ -160,7 +173,7 @@
             this.SettingsTab.Location = new System.Drawing.Point(4, 22);
             this.SettingsTab.Name = "SettingsTab";
             this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SettingsTab.Size = new System.Drawing.Size(560, 291);
+            this.SettingsTab.Size = new System.Drawing.Size(560, 247);
             this.SettingsTab.TabIndex = 1;
             this.SettingsTab.Text = "Settings";
             this.SettingsTab.UseVisualStyleBackColor = true;
@@ -189,21 +202,30 @@
             this.chkBtnServer.Text = "Enable Network Listerning";
             this.chkBtnServer.UseVisualStyleBackColor = true;
             // 
-            // btnDisplay
+            // label1
             // 
-            this.btnDisplay.Location = new System.Drawing.Point(245, 53);
-            this.btnDisplay.Name = "btnDisplay";
-            this.btnDisplay.Size = new System.Drawing.Size(75, 23);
-            this.btnDisplay.TabIndex = 0;
-            this.btnDisplay.Text = "Display";
-            this.btnDisplay.UseVisualStyleBackColor = true;
-            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(502, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Keys Pressed:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 341);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl);
             this.KeyPreview = true;
             this.Name = "Form1";
@@ -213,12 +235,14 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUpEvent);
             this.tabControl.ResumeLayout(false);
             this.inputTab.ResumeLayout(false);
+            this.inputTab.PerformLayout();
             this.PeersTab.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.SettingsTab.ResumeLayout(false);
             this.SettingsTab.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -238,6 +262,8 @@
         private System.Windows.Forms.ImageList imgListOS;
         private System.Windows.Forms.ColumnHeader AcceptInput;
         private System.Windows.Forms.Button btnDisplay;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

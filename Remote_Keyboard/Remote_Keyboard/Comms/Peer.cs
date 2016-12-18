@@ -13,10 +13,19 @@ namespace Remote_Keyboard.Comms
         //when timer expires the connect to the client is assumed to be lost
         public Timer aliveTimeout;
 
+        //every peer has its own connection
+        public PeerConnection peerConnection;
+
+        public bool activePeer = true;
+
         //constructor
-        public Peer( HeartBeat mLastHeartBeat, double timeOutTimeMillSec)
+        public Peer( HeartBeat mLastHeartBeat, double timeOutTimeMillSec )
         {
             this.lastHeartBeat = mLastHeartBeat;
+
+            string peerIpAddress = mLastHeartBeat.senderIpAddress;
+
+            this.peerConnection = new PeerConnection(peerIpAddress);
 
             this.aliveTimeout = new Timer();
             this.aliveTimeout.Interval = timeOutTimeMillSec;

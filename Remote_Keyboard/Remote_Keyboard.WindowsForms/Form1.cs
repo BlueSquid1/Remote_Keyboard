@@ -158,7 +158,8 @@ namespace Remote_Keyboard.WindowsForms
             // Draw each image using the ImageList.Draw() method.
             for (int i = 0; i < imgListOS.Images.Count; i++)
             {
-                imgListOS.Draw(g, 30 + i * 30, 30, i);
+                int imgWidth = imgListOS.Images[i].Width;
+                imgListOS.Draw(g, this.Width - imgWidth - (i) * imgWidth, 40, i);
             }
 
             // Release the graphics device context.
