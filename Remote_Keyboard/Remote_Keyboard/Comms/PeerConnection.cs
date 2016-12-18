@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
+using System.IO;
 
 namespace Remote_Keyboard.Comms
 {
@@ -16,6 +17,7 @@ namespace Remote_Keyboard.Comms
         private TcpListener tcpListener;
 
         private static readonly int portNum = 10011;
+        private string ipAddress;
 
         //static constructor
         static PeerConnection()
@@ -28,9 +30,11 @@ namespace Remote_Keyboard.Comms
         //constructor
         public PeerConnection(string ipAddress)
         {
-            //TODO start TCP listener so can complete handshake with other peers
-            tcpListener = new TcpListener(portNum);
-            tcpClient = new TcpClient(ipAddress, portNum);
+            this.ipAddress = ipAddress;
+            //tcpListener = new TcpListener(IPAddress.Parse(ipAddress), portNum);
+            tcpListener = new TcpListener(IPAddress.Any, portNum);
+            StartListening();
+            //tcpClient = new TcpClient(ipAddress, portNum);
         }
 
         //non-blocking
@@ -57,22 +61,55 @@ namespace Remote_Keyboard.Comms
         public async void SendMessageToPeer(string message)
         {
             //TODO
+            tcpClient = new TcpClient();
+            tcpClient.Connect(ipAddress, portNum);
+
+
+            NetworkStream netStream = tcpClient.GetStream();
+            StreamWriter sw = new StreamWriter(netStream);
+            sw.Write((string)message);
+            //sw.Write((string)messa
+            sw.Flush();
+
+            netStream.Close();
+            tcpClient.Close();
+        }
+
+        //non-blocking
+        private async void StartListening()
+        {
+            tcpListener.Start();
+            
+            while (true)
+            {
+                
+                TcpClient client = await tcpListener.AcceptTcpClientAsync();
+                /*
+                NetworkStream netStream = client.GetStream();
+                BinaryReader reader = new BinaryReader(netStream);
+                string message = reader.ReadString();
+                Console.WriteLine(message);
+                */
+            }
+            
         }
 
 
 
 
-                /*
-                //non-blocking
-                private async void SendMessageAsync(string ipAddress, string message)
-                {
-                    IPAddress ipAddressObj = IPAddress.Parse(ipAddress);
-                    IPEndPoint endPoint = new IPEndPoint(ipAddressObj, this.portNum);
-                    byte[] datagram = Encoding.ASCII.GetBytes(message);
 
-                    await udpConnection.SendAsync(datagram, datagram.Length, endPoint);
-                }
-                */
 
-            }
+        /*
+        //non-blocking
+        private async void SendMessageAsync(string ipAddress, string message)
+        {
+            IPAddress ipAddressObj = IPAddress.Parse(ipAddress);
+            IPEndPoint endPoint = new IPEndPoint(ipAddressObj, this.portNum);
+            byte[] datagram = Encoding.ASCII.GetBytes(message);
+
+            await udpConnection.SendAsync(datagram, datagram.Length, endPoint);
+        }
+        */
+
+    }
 }

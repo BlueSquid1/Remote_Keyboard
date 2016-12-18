@@ -19,7 +19,6 @@ namespace Remote_Keyboard.Common
         //constructor
         public AirKeyboard(EventManager evntManager)
         {
-            int portNum = 10010;
             keysHeldDown = new List<string>();
             this.eventManager = evntManager;
             this.baseStation = new BaseStation();

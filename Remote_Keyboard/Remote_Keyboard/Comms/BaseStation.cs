@@ -102,7 +102,7 @@ namespace Remote_Keyboard.Comms
             bool fromExistingPeer = IsIpAddressKnown(hrtBtMsg.senderIpAddress);
             if (!fromThisPeer && !fromExistingPeer)
             {
-                //new peer
+                //establish TCP connection with that peer
                 Peer latestPeer = new Peer(hrtBtMsg, timeOutMilliSec);
                 latestPeer.aliveTimeout.Elapsed += AliveTimeoutElapsed;
 
@@ -120,7 +120,9 @@ namespace Remote_Keyboard.Comms
             Peer inActivePeer = (Peer)sender;
             inActivePeer.activePeer = false;
             */
-            PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
+
+            //TODO - DANGER, running in another thread. Can't edit windows forms elements!!!!!!!!!!!!!!!
+            //PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
         }
 
         private void RecievedKeyStroke(KeyStrokeMsg kyStrkMsg)
