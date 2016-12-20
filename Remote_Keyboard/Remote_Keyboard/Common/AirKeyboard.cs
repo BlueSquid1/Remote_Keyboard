@@ -58,6 +58,14 @@ namespace Remote_Keyboard.Common
             baseStation.SendMessageToAllPeers(message);
         }
 
+        public void SendKeyList(List<ushort> nativeKeys, bool isPressed)
+        {
+            foreach(ushort keyValue in nativeKeys)
+            {
+                this.SendKey(keyValue, isPressed);
+            }
+        }
+
 
         private void LogKey(string sdlValue, bool isPressed)
         {
@@ -65,6 +73,9 @@ namespace Remote_Keyboard.Common
             {
                 //check if key has already been added
                 this.AddUniqueKey(sdlValue);
+
+                //broadcast update
+                KeyLogUpdate?.Invoke(this, new KeyLogUpdateEventArgs(keysHeldDown));
             }
             else
             {
@@ -87,9 +98,6 @@ namespace Remote_Keyboard.Common
             }
             //add the key
             keysHeldDown.Add(sdlValue);
-
-            //broadcast update
-            KeyLogUpdate?.Invoke(this, new KeyLogUpdateEventArgs(keysHeldDown));
         }
     }
 }

@@ -108,6 +108,9 @@ namespace Remote_Keyboard.Comms
 
                 knownPeers.Add(latestPeer);
 
+                //broadcast again so other peers can quickly discover this peer
+                PeerConnection.SendBroadcastAsync(this.brdcstMsg);
+
                 //send out a broadcast to all subscribers
                 PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
             }

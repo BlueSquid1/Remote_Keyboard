@@ -20,6 +20,12 @@ namespace Remote_Keyboard.WindowsForms
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
 
+        //because windows struggles to distinguish between left and right shift keys need to remember which is which for it
+        private bool rightShiftDown = false;
+        private bool leftShiftDown = false;
+        private bool rightControlDown = false;
+        private bool leftControlDown = false;
+
         private AirKeyboard airKeyboard;
 
         public Form1()
@@ -35,19 +41,7 @@ namespace Remote_Keyboard.WindowsForms
             airKeyboard.KeyLogUpdate += AirKeyboard_KeyLogUpdate;
         }
 
-        private void test()
-        {
-            /*
-            PictureButton button = new PictureButton();
-            button.Text = "Click Me";
-            button.Parent = this;
-            button.Bounds = new Rectangle(10, 30, 150, 30);
-            button.ForeColor = Color.White;
-            button.BackgroundImage = MakeBitmap(Color.Blue, button.Width, button.Height);
-            button.PressedImage = MakeBitmap(Color.LightBlue, button.Width, button.Height);
-            */   
-        }
-
+        /*
         // Create a bitmap object and fill it with the specified color.   
         // To make it look like a custom image, draw an ellipse in it.
         Bitmap MakeBitmap(Color color, int width, int height)
@@ -60,15 +54,18 @@ namespace Remote_Keyboard.WindowsForms
 
             return bmp;
         }
+        */
 
         private void AirKeyboard_KeyLogUpdate(object sender, Events.KeyLogUpdateEventArgs e)
         {
             //print keys pressed down
-            foreach (string sdlKey in e.keysHeldDown)
+            string keyPressedList = "";
+            for(int i = 0; i < e.keysHeldDown.Count; ++i)
             {
-                Console.Write(sdlKey + " ");
+                keyPressedList += e.keysHeldDown[i] + ", ";
             }
-            Console.WriteLine();
+
+            KeysPressed.Text = keyPressedList;
         }
 
         private void AirKeyboard_PeerChanged(object sender, PeerUpdateEventArgs e)
@@ -97,57 +94,143 @@ namespace Remote_Keyboard.WindowsForms
         //upboard down event
         private void KeyDownEvent(object sender, KeyEventArgs e)
         {
-            ushort keyValue = PreProcessKeyEvent(e);
+            ushort keyValue = PreProcessKeyEventDown(e);
+            List<ushort> keyValues = new List<ushort>();
+            keyValues.Add(keyValue);
 
             bool isPressed = true;
-            KeyEvent(keyValue, isPressed);
+            KeyEvents(keyValues, isPressed);
         }
 
         private void KeyUpEvent(object sender, KeyEventArgs e)
         {
-            ushort keyValue = PreProcessKeyEvent(e);
+            List<ushort> keyValues = PreProcessKeyEventUp(e);
 
             bool isPressed = false;
-            KeyEvent(keyValue, isPressed);
+            KeyEvents(keyValues, isPressed);
         }
 
-        private void KeyEvent(ushort keyValue, bool isPressed)
+        private void KeyEvents(List<ushort> keyValue, bool isPressed)
         {
             bool keybroadLstn = chkBtnkeyboard.Checked;
             string curTabName = tabControl.SelectedTab.Name;
             if (keybroadLstn && curTabName == "inputTab")
             {
-                airKeyboard.SendKey(keyValue, isPressed);
+                airKeyboard.SendKeyList(keyValue, isPressed);
             }
         }
 
-        private ushort PreProcessKeyEvent(KeyEventArgs e)
+        private ushort PreProcessKeyEventDown(KeyEventArgs e)
         {
             ushort keyValue = (ushort)e.KeyValue;
             if ( e.KeyCode == Keys.ShiftKey )
             {
-                if (Convert.ToBoolean(GetAsyncKeyState(Keys.RShiftKey)))
+                if (Convert.ToBoolean(GetAsyncKeyState(Keys.RShiftKey)) && !rightShiftDown)
                 {
                     keyValue = (ushort)Keys.RShiftKey;
+                    rightShiftDown = true;
+                }
+                else if (Convert.ToBoolean(GetAsyncKeyState(Keys.LShiftKey)) && !leftShiftDown)
+                {
+                    keyValue = (ushort)Keys.LShiftKey;
+                    leftShiftDown = true;
                 }
                 else
                 {
-                    keyValue = (ushort)Keys.LShiftKey;
+                    //failed to predict key. Just return a value according to the state
+                    if (rightShiftDown)
+                    {
+                        keyValue = (ushort)Keys.RShiftKey;
+                        rightShiftDown = true;
+                    }
+                    else
+                    {
+                        keyValue = (ushort)Keys.LShiftKey;
+                        leftShiftDown = true;
+                    }
                 }
             }
 
             if( e.KeyCode == Keys.ControlKey )
             {
-                if (Convert.ToBoolean(GetAsyncKeyState(Keys.RControlKey)))
+                if (Convert.ToBoolean(GetAsyncKeyState(Keys.RControlKey)) && !rightControlDown)
                 {
                     keyValue = (ushort)Keys.RControlKey;
+                    rightControlDown = true;
+                }
+                else if (Convert.ToBoolean(GetAsyncKeyState(Keys.LControlKey)) && !leftControlDown)
+                {
+                    keyValue = (ushort)Keys.LControlKey;
+                    leftControlDown = true;
                 }
                 else
                 {
-                    keyValue = (ushort)Keys.LControlKey;
+                    //failed to predict key. Just return a value according to the state
+                    if (rightControlDown)
+                    {
+                        keyValue = (ushort)Keys.RControlKey;
+                        rightControlDown = true;
+                    }
+                    else
+                    {
+                        keyValue = (ushort)Keys.LControlKey;
+                        leftControlDown = true;
+                    }
                 }
+
             }
             return keyValue;
+        }
+
+        private List<ushort> PreProcessKeyEventUp(KeyEventArgs e)
+        {
+            //this is windows best guess of what key I released
+            ushort WindowsDumbKeyValue = (ushort)e.KeyValue;
+
+            List<ushort> keyPresses = new List<ushort>();
+
+            //based on the current state try to guess what actually key has just been released
+            if (e.KeyCode == Keys.ShiftKey)
+            {
+                //clear all the shifts keys that have been pressed down
+                if (rightShiftDown)
+                {
+                    ushort RShiftValue = (ushort)Keys.RShiftKey;
+                    keyPresses.Add(RShiftValue);
+                    rightShiftDown = false;
+                }
+                if (leftShiftDown)
+                {
+                    ushort LShiftValue = (ushort)Keys.LShiftKey;
+                    keyPresses.Add(LShiftValue);
+                    leftShiftDown = false;
+                }
+            }
+
+            if (e.KeyCode == Keys.ControlKey)
+            {
+                if (rightControlDown)
+                {
+                    ushort RControlValue = (ushort)Keys.RControlKey;
+                    keyPresses.Add(RControlValue);
+                    rightControlDown = false;
+                }
+                if (leftControlDown)
+                {
+                    ushort LControlValue = (ushort)Keys.LControlKey;
+                    keyPresses.Add(LControlValue);
+                    leftControlDown = false;
+                }
+            }
+
+            //make sure to populate the return list with 
+            //windows dumb key value if not populate already
+            if(keyPresses.Count <= 0)
+            {
+                keyPresses.Add(WindowsDumbKeyValue);
+            }
+
+            return keyPresses;
         }
 
         private void btnDisplay_Click(object sender, EventArgs e)

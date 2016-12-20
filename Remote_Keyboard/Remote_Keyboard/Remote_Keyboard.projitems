@@ -13,9 +13,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\AirKeyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\BaseStation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\HeartBeat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comms\IMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\KeyStrokeEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\KeyStrokeMsg.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Comms\IMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\MsgReceivedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\Peer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comms\PeerConnection.cs" />

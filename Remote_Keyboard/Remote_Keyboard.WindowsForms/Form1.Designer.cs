@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.inputTab = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnDisplay = new System.Windows.Forms.Button();
             this.PeersTab = new System.Windows.Forms.TabPage();
             this.peerListView = new System.Windows.Forms.ListView();
@@ -45,8 +46,8 @@
             this.SettingsTab = new System.Windows.Forms.TabPage();
             this.chkBtnkeyboard = new System.Windows.Forms.CheckBox();
             this.chkBtnServer = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.KeysPressed = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.inputTab.SuspendLayout();
             this.PeersTab.SuspendLayout();
@@ -77,6 +78,15 @@
             this.inputTab.TabIndex = 0;
             this.inputTab.Text = "Input";
             this.inputTab.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
             // 
             // btnDisplay
             // 
@@ -202,15 +212,6 @@
             this.chkBtnServer.Text = "Enable Network Listerning";
             this.chkBtnServer.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 64);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -220,11 +221,21 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Keys Pressed:";
             // 
+            // KeysPressed
+            // 
+            this.KeysPressed.Enabled = false;
+            this.KeysPressed.Location = new System.Drawing.Point(366, 34);
+            this.KeysPressed.Name = "KeysPressed";
+            this.KeysPressed.Size = new System.Drawing.Size(207, 20);
+            this.KeysPressed.TabIndex = 7;
+            this.KeysPressed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 341);
+            this.Controls.Add(this.KeysPressed);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl);
             this.KeyPreview = true;
@@ -264,6 +275,7 @@
         private System.Windows.Forms.Button btnDisplay;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox KeysPressed;
     }
 }
 
