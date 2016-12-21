@@ -6,6 +6,7 @@ using System.Net; //for IPEndPoint
 using System.Timers; //for broadcast events
 using System.Linq;
 using Remote_Keyboard.Common;
+using System.ComponentModel;
 
 
 /*
@@ -29,7 +30,7 @@ namespace Remote_Keyboard.Comms
         //private UdpClient udpConnection;
         private Timer brdcstTmr;
         private string brdcstMsg;
-        private double timeOutMilliSec = 10e3;
+        private double timeOutMilliSec = 3e3;
 
         //stores other peers on the network
         private List<Peer> knownPeers;
@@ -38,6 +39,7 @@ namespace Remote_Keyboard.Comms
         //peer change event
         public event EventHandler<PeerUpdateEventArgs> PeerChanged;
         public event EventHandler<KeyStrokeEventArgs> KeyStrokeReceived;
+        public BackgroundWorker test;
 
         //constructor
         public BaseStation()
@@ -50,6 +52,9 @@ namespace Remote_Keyboard.Comms
                 acceptCopySync = true,
                 platform = OSValue.Windows10
             };
+
+            test = new BackgroundWorker();
+            test.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(Test_RunWorkerCompleted);
 
             int timeIntrvlMilliSec = 3000;
             PeerConnection.MsgReceived += PeerConnectionMsgReceived;
@@ -68,7 +73,7 @@ namespace Remote_Keyboard.Comms
 
                 case MessageType.KeyStroke:
                     KeyStrokeMsg keyStrkObj = XMLParser.DeserializeObject<KeyStrokeMsg>(e.message);
-                    this.RecievedKeyStroke(keyStrkObj);
+                    this.RecievedKeyStrokeMsg(keyStrkObj);
                     break;
 
                 default:
@@ -119,16 +124,28 @@ namespace Remote_Keyboard.Comms
         private void AliveTimeoutElapsed(object sender, ElapsedEventArgs e)
         {
             //TODO - test if this updates the peer in the list of peers
-            /*
-            Peer inActivePeer = (Peer)sender;
-            inActivePeer.activePeer = false;
-            */
+            Timer inactivePeerTimer = (Timer)sender;
+            foreach(Peer peer in knownPeers)
+            {
+                bool sameTimer = inactivePeerTimer.Equals(peer.aliveTimeout);
+                if(sameTimer)
+                {
+                    peer.activePeer = false;
+                }
+            }
 
             //TODO - DANGER, running in another thread. Can't edit windows forms elements!!!!!!!!!!!!!!!
+            test.RunWorkerAsync();
             //PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
         }
 
-        private void RecievedKeyStroke(KeyStrokeMsg kyStrkMsg)
+        private void Test_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
+        }
+
+
+        private void RecievedKeyStrokeMsg(KeyStrokeMsg kyStrkMsg)
         {
             KeyStrokeReceived?.Invoke(this, new KeyStrokeEventArgs(kyStrkMsg));
         }

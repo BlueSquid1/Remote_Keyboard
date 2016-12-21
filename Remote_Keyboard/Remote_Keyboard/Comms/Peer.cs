@@ -28,6 +28,7 @@ namespace Remote_Keyboard.Comms
             this.peerConnection = new PeerConnection(peerIpAddress);
 
             this.aliveTimeout = new Timer();
+            this.aliveTimeout.AutoReset = false;
             this.aliveTimeout.Interval = timeOutTimeMillSec;
             this.aliveTimeout.Start();
         }

@@ -30,6 +30,7 @@ namespace Remote_Keyboard.Common
         {
             string sdlValue = e.keyStrkMsg.keyStrokeSDL;
             bool isPressed = e.keyStrkMsg.isPressed;
+            LogKey(sdlValue, isPressed);
             eventManager.TriggerKeyPress(e.keyStrkMsg.keyStrokeSDL, isPressed);
         }
 
@@ -37,7 +38,6 @@ namespace Remote_Keyboard.Common
         {
             this.PeerChanged?.Invoke(sender, e);
         }
-
 
 
         //connect with native keyboard

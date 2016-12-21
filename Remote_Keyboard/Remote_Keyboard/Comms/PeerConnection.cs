@@ -12,7 +12,6 @@ namespace Remote_Keyboard.Comms
         public static event EventHandler<MsgReceivedEventArgs> MsgReceived;
 
         private static UdpClient udpClient;
-        private TcpClient tcpClient;
         //TODO - I think this might be static?
         private TcpListener tcpListener;
 
@@ -24,7 +23,7 @@ namespace Remote_Keyboard.Comms
         {
             udpClient = new UdpClient(portNum);
             udpClient.EnableBroadcast = true;
-            StartingListeningAsync();
+            StartListeningFromUDPAsync();
         }
 
         //constructor
@@ -33,8 +32,14 @@ namespace Remote_Keyboard.Comms
             this.ipAddress = ipAddress;
             //tcpListener = new TcpListener(IPAddress.Parse(ipAddress), portNum);
             tcpListener = new TcpListener(IPAddress.Any, portNum);
-            StartListening();
+            StartListeningForTCP();
             //tcpClient = new TcpClient(ipAddress, portNum);
+        }
+
+        //deconstructor
+        ~PeerConnection()
+        {
+            tcpListener.Stop();
         }
 
         //non-blocking
@@ -47,7 +52,7 @@ namespace Remote_Keyboard.Comms
         }
 
         //non-blocking
-        private static async void StartingListeningAsync()
+        private static async void StartListeningFromUDPAsync()
         {
             while (true)
             {
@@ -60,15 +65,13 @@ namespace Remote_Keyboard.Comms
 
         public async void SendMessageToPeer(string message)
         {
-            //TODO
-            tcpClient = new TcpClient();
+            TcpClient tcpClient = new TcpClient();
             tcpClient.Connect(ipAddress, portNum);
 
 
             NetworkStream netStream = tcpClient.GetStream();
             StreamWriter sw = new StreamWriter(netStream);
-            sw.Write((string)message);
-            //sw.Write((string)messa
+            await sw.WriteAsync(message);
             sw.Flush();
 
             netStream.Close();
@@ -76,22 +79,26 @@ namespace Remote_Keyboard.Comms
         }
 
         //non-blocking
-        private async void StartListening()
+        private async void StartListeningForTCP()
         {
             tcpListener.Start();
-            
+
+            int count = 0;
             while (true)
             {
                 
                 TcpClient client = await tcpListener.AcceptTcpClientAsync();
-                /*
+                
                 NetworkStream netStream = client.GetStream();
-                BinaryReader reader = new BinaryReader(netStream);
-                string message = reader.ReadString();
-                Console.WriteLine(message);
-                */
+                //BinaryReader reader = new BinaryReader(netStream);
+
+                byte[] buffer = new byte[client.ReceiveBufferSize];
+                netStream.Read(buffer, 0, client.ReceiveBufferSize);
+
+                string message = Encoding.ASCII.GetString(buffer);
+                MsgReceived?.Invoke(null, new MsgReceivedEventArgs(message));
             }
-            
+
         }
 
 

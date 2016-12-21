@@ -77,6 +77,7 @@ namespace Remote_Keyboard.WindowsForms
                 string[] peerDtl = {
                     peer.lastHeartBeat.senderIpAddress,
                     peer.lastHeartBeat.acceptKeyStrokes.ToString(),
+                    peer.activePeer.ToString()
 
                 };
                 int OSIndex = (int)peer.lastHeartBeat.platform;
