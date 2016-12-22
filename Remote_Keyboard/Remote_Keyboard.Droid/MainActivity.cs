@@ -40,8 +40,6 @@ namespace Remote_Keyboard.Droid
 
             editText.TextChanged += TextChanged;
 
-            airKeyboard.PeerChanged += AirKeyboard_PeerChanged;
-
         }
 
         //detects hard keyboard inputs
