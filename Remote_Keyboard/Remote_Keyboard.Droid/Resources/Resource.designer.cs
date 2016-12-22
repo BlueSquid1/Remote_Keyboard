@@ -60,14 +60,20 @@ namespace Remote_Keyboard.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int editText = 2131034113;
+			// aapt resource value: 0x7f060004
+			public const int MyButton = 2131099652;
 			
-			// aapt resource value: 0x7f050000
-			public const int layout = 2131034112;
+			// aapt resource value: 0x7f060002
+			public const int editText = 2131099650;
 			
-			// aapt resource value: 0x7f050002
-			public const int textView = 2131034114;
+			// aapt resource value: 0x7f060000
+			public const int layout = 2131099648;
+			
+			// aapt resource value: 0x7f060003
+			public const int textView = 2131099651;
+			
+			// aapt resource value: 0x7f060001
+			public const int toolbar = 2131099649;
 			
 			static Id()
 			{
@@ -84,6 +90,9 @@ namespace Remote_Keyboard.Droid
 			
 			// aapt resource value: 0x7f030000
 			public const int Main = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int toolbar = 2130903041;
 			
 			static Layout()
 			{
@@ -110,6 +119,22 @@ namespace Remote_Keyboard.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int MyTheme = 2131034112;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
