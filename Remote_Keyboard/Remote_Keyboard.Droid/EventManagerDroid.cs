@@ -12,14 +12,16 @@ using Android.Widget;
 using System.IO;
 using Android.Content.Res;
 using System.Xml;
+using Remote_Keyboard.Events;
 
 namespace Remote_Keyboard.Droid
 {
     class EventManagerDroid : EventManager
     {
         //constructor
-        public EventManagerDroid(AssetManager assets)
+        public EventManagerDroid(Stream keyStrokeFileStream) : base(keyStrokeFileStream, PlateformID.droid)
         {
+            /*
             //StreamReader streamReader = new StreamReader(assets.Open("KeyMapping.xml"));
             XmlDocument doc = new XmlDocument();
             doc.Load(assets.Open("KeyMapping.xml"));
@@ -37,21 +39,12 @@ namespace Remote_Keyboard.Droid
                 sdlKeyToNativeKey[SDLKey] = keyValue;
                 nativeKeyToSdlKey[keyValue] = SDLKey;
             }
+            */
         }
 
-        public override string NativeKeytoSdlKey(ushort scanCode)
+        public override void TriggerKeyPress(string sdlKey, bool isPressed)
         {
-            throw new NotImplementedException();
-        }
 
-        public override ushort SdlKeyToNativeKey(string sdlKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void TriggerKeyPress(string scanCode, bool isPressed)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Remote_Keyboard.Events
@@ -10,9 +11,9 @@ namespace Remote_Keyboard.Events
 
 
         //constructor
-        public EventManager(PlateformID plateform)
+        public EventManager(Stream keyStrokeFileStream, PlateformID plateform)
         {
-            this.keyMapper = new NativeKeyMapper(plateform);
+            this.keyMapper = new NativeKeyMapper(keyStrokeFileStream, plateform);
         }
 
         public virtual void TriggerKeyPress(string sdlKey, bool isPressed)

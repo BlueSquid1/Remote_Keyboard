@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices; //for calling win32 API
 using System.Xml; //for xml parsing
 using Remote_Keyboard.Events; //handling keyboard events
+using System.IO;
 
 namespace Remote_Keyboard.WindowsForms
 {
@@ -21,7 +22,7 @@ namespace Remote_Keyboard.WindowsForms
         private static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
         //constructor
-        public EventManagerWin() : base(PlateformID.winForms)
+        public EventManagerWin(Stream keyStrokeFileStream) : base(keyStrokeFileStream, PlateformID.winForms)
         {
 
         }

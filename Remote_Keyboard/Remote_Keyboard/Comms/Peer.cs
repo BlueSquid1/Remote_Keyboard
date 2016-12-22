@@ -14,7 +14,7 @@ namespace Remote_Keyboard.Comms
         public Timer aliveTimeout;
 
         //every peer has its own connection
-        public PeerConnection peerConnection;
+        public PeerConnectionNew peerConnection;
 
         public bool activePeer = true;
 
@@ -25,7 +25,7 @@ namespace Remote_Keyboard.Comms
 
             string peerIpAddress = mLastHeartBeat.senderIpAddress;
 
-            this.peerConnection = new PeerConnection(peerIpAddress);
+            this.peerConnection = new PeerConnectionNew(peerIpAddress);
 
             this.aliveTimeout = new Timer();
             this.aliveTimeout.AutoReset = false;

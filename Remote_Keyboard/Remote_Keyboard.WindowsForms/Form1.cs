@@ -12,6 +12,7 @@ using Remote_Keyboard;
 using Remote_Keyboard.Common;
 using System.Runtime.InteropServices;
 using Remote_Keyboard.Comms;
+using System.IO;
 
 namespace Remote_Keyboard.WindowsForms
 {
@@ -35,7 +36,8 @@ namespace Remote_Keyboard.WindowsForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            EventManagerWin eventManager = new EventManagerWin();
+            FileStream fileStream = new FileStream("KeyMapping.xml", FileMode.Open);
+            EventManagerWin eventManager = new EventManagerWin(fileStream);
             airKeyboard = new AirKeyboard(eventManager);
             airKeyboard.PeerChanged += AirKeyboard_PeerChanged;
             airKeyboard.KeyLogUpdate += AirKeyboard_KeyLogUpdate;
@@ -70,6 +72,10 @@ namespace Remote_Keyboard.WindowsForms
 
         private void AirKeyboard_PeerChanged(object sender, PeerUpdateEventArgs e)
         {
+            //airKeyboard.baseStation.knownPeers[0].aliveTimeout.SynchronizingObject = this;
+            //ISynchronizeInvoke
+
+
             //update view list
             peerListView.Items.Clear();
             foreach ( Peer peer in e.peers )

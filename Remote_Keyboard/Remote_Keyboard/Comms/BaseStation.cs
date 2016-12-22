@@ -25,12 +25,12 @@ namespace Remote_Keyboard.Comms
 {
     class BaseStation
     {
-        private static BaseStation instance = null;
 
         //private UdpClient udpConnection;
         private Timer brdcstTmr;
         private string brdcstMsg;
         private double timeOutMilliSec = 3e3;
+        private int timeIntrvlMilliSec = (int)1e3;
 
         //stores other peers on the network
         private List<Peer> knownPeers;
@@ -39,7 +39,6 @@ namespace Remote_Keyboard.Comms
         //peer change event
         public event EventHandler<PeerUpdateEventArgs> PeerChanged;
         public event EventHandler<KeyStrokeEventArgs> KeyStrokeReceived;
-        public BackgroundWorker test;
 
         //constructor
         public BaseStation()
@@ -53,11 +52,8 @@ namespace Remote_Keyboard.Comms
                 platform = OSValue.Windows10
             };
 
-            test = new BackgroundWorker();
-            test.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(Test_RunWorkerCompleted);
 
-            int timeIntrvlMilliSec = 3000;
-            PeerConnection.MsgReceived += PeerConnectionMsgReceived;
+            PeerConnectionNew.MsgReceived += PeerConnectionMsgReceived;
             StartBroadcasting(timeIntrvlMilliSec);
         }
 
@@ -96,7 +92,7 @@ namespace Remote_Keyboard.Comms
 
         private void BroadCastEvent(object sender, ElapsedEventArgs e)
         {
-            PeerConnection.SendBroadcastAsync(this.brdcstMsg);
+            PeerConnectionNew.SendBrdcstUDPAsync(this.brdcstMsg);
         }
 
         private void ReceivedHeartBeat(HeartBeat hrtBtMsg)
@@ -108,13 +104,15 @@ namespace Remote_Keyboard.Comms
             if (!fromThisPeer && !fromExistingPeer)
             {
                 //establish TCP connection with that peer
+                Console.WriteLine("test");
                 Peer latestPeer = new Peer(hrtBtMsg, timeOutMilliSec);
                 latestPeer.aliveTimeout.Elapsed += AliveTimeoutElapsed;
 
                 knownPeers.Add(latestPeer);
 
-                //broadcast again so other peers can quickly discover this peer
-                PeerConnection.SendBroadcastAsync(this.brdcstMsg);
+                //some Android phones reject UDP broadcasts
+                //therefore message dirrectly so both peers know about each other
+                latestPeer.peerConnection.SendMsgToPeerUDP(this.brdcstMsg);
 
                 //send out a broadcast to all subscribers
                 PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
@@ -135,13 +133,8 @@ namespace Remote_Keyboard.Comms
             }
 
             //TODO - DANGER, running in another thread. Can't edit windows forms elements!!!!!!!!!!!!!!!
-            test.RunWorkerAsync();
-            //PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
-        }
-
-        private void Test_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
             PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
+            //PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
         }
 
 
@@ -166,7 +159,7 @@ namespace Remote_Keyboard.Comms
         {
             foreach(Peer peer in knownPeers)
             {
-                peer.peerConnection.SendMessageToPeer(message);         
+                peer.peerConnection.SendMsgToPeerTCP(message);         
             }
         }
 

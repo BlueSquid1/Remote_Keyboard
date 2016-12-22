@@ -8,10 +8,10 @@ namespace Remote_Keyboard.Common
 {
     class AirKeyboard
     {
-        private EventManager eventManager;
-        private BaseStation baseStation;
+        protected EventManager eventManager;
+        protected BaseStation baseStation;
 
-        private List<string> keysHeldDown;
+        protected List<string> keysHeldDown;
 
         public event EventHandler<PeerUpdateEventArgs> PeerChanged;
         public event EventHandler<KeyLogUpdateEventArgs> KeyLogUpdate;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -19,9 +20,8 @@ namespace Remote_Keyboard.Events
         private Dictionary<ushort, string> nativeKeyToSdlKey = new Dictionary<ushort, string>();
         
         //constructor
-        public NativeKeyMapper(PlateformID plateform)
+        public NativeKeyMapper(Stream keyStrokeFileStream, PlateformID plateform)
         {
-            string xmlMaperFile = "KeyMapping.xml";
             string pltfrmNme = "";
             switch(plateform)
             {
@@ -35,15 +35,16 @@ namespace Remote_Keyboard.Events
                     pltfrmNme = "iOSValue";
                     break;
             }
-            PopulateKeyMapping(xmlMaperFile, pltfrmNme);
+            PopulateKeyMapping(keyStrokeFileStream, pltfrmNme);
+            
         }
 
-        private void PopulateKeyMapping(string xmlMaperFile, string plateform)
+        private void PopulateKeyMapping(Stream keyStrokeFileStream, string plateform)
         {
             //create an xmlReader
             XmlReaderSettings readerSettings = new XmlReaderSettings();
             readerSettings.IgnoreComments = true;
-            XmlReader reader = XmlReader.Create(xmlMaperFile, readerSettings);
+            XmlReader reader = XmlReader.Create(keyStrokeFileStream, readerSettings);
 
             //conver to XmlDocument
             XmlDocument doc = new XmlDocument();

@@ -5,6 +5,10 @@ using Android.Views;
 using Android.Widget;
 using System;
 using Android.Runtime;
+using System.ComponentModel;
+using Remote_Keyboard.Common;
+using Remote_Keyboard.Events;
+using System.IO;
 
 namespace Remote_Keyboard.Droid
 {
@@ -15,6 +19,7 @@ namespace Remote_Keyboard.Droid
 
         private TextView textView;
         private EditText editText;
+        AirKeyboard airKeyboard;
 
 
         //entry point
@@ -23,7 +28,9 @@ namespace Remote_Keyboard.Droid
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            EventManager eventManager = new EventManagerDroid(this.Assets);
+            Stream fileStream = Assets.Open("KeyMapping.xml");
+            EventManager eventManager = new EventManagerDroid(fileStream);
+            airKeyboard = new AirKeyboard(eventManager);
 
             //LinearLayout background = FindViewById<LinearLayout>(Resource.Id.background);
 
@@ -33,7 +40,7 @@ namespace Remote_Keyboard.Droid
 
             editText.TextChanged += TextChanged;
 
-            
+            airKeyboard.PeerChanged += AirKeyboard_PeerChanged;
 
         }
 
