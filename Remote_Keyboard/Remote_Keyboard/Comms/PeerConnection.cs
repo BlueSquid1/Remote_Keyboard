@@ -4,86 +4,88 @@ using System.Text;
 using System.Net.Sockets;
 using System.Net;
 using System.IO;
-using Sockets.Plugin;
-using Sockets.Plugin.Abstractions;
 using System.Threading.Tasks;
 
 namespace Remote_Keyboard.Comms
 {
     public class PeerConnection
     {
-		//static methods and variables don't used a specific IP address
+        //static methods and variables don't used a specific IP address
         public static event EventHandler<MsgReceivedEventArgs> MsgReceived;
+        public static event EventHandler<NewPeerEventArgs> NewPeerEvent;
 
-		private static readonly int portNum = 8762;
+        private static readonly int portNum = 8762;
+        public string peerIpAddress { get; set; }
 
-        private static UdpSocketReceiver udpListener;
-        private static UdpSocketClient udpClient;
-		private static TcpSocketListener tcpListener;
+        private static TcpListener tcpListener;
+        private static UdpClient udpClient;
 
-		//non-static variables and methods are specific to a given IP address
-		private TcpSocketClient tcpClient;
+        private TcpClient tcpClient;
 
-		public string ipAddress { get; set; }
-
-		//static constructor
-		static PeerConnection()
+        //static constructor
+        static PeerConnection()
         {
-			udpListener = new UdpSocketReceiver();
-			udpClient = new UdpSocketClient();
-			tcpListener = new TcpSocketListener();
+            //start the TCP and UDP servers
+            udpClient = new UdpClient(portNum);
+            tcpListener = new TcpListener(IPAddress.Any, portNum);
 
             StartListeningFromUDPAsync();
-			StartListeningForTCP();
+            StartListeningFromTCPAsync();
         }
 
         //constructor
         public PeerConnection(string ipAddress)
         {
-            this.ipAddress = ipAddress;
-			this.tcpClient = new TcpSocketClient();
+            this.peerIpAddress = ipAddress;
+            tcpClient = new TcpClient(ipAddress, portNum);
+            Console.WriteLine("connected = " + tcpClient.Connected.ToString());
+        }
 
-			this.ConnectToClientTCP();
-		}
+        //non-blocking
+        private static async void StartListeningFromUDPAsync()
+        {
+            udpClient.EnableBroadcast = true;
 
-		//deconstructor
-		~PeerConnection()
-		{
-			tcpClient.DisconnectAsync();
-		}
+            while (true)
+            {
+                UdpReceiveResult receivedUDP = await udpClient.ReceiveAsync();
+                //received message
+                string message = Encoding.UTF8.GetString(receivedUDP.Buffer);
+                MsgReceived?.Invoke(null, new MsgReceivedEventArgs(message));
+            }
+        }
 
-		//non-blocking
-		private static void StartListeningFromUDPAsync()
-		{
-			udpListener.MessageReceived += UdpListener_MessageReceived;
-			udpListener.StartListeningAsync(portNum);
-		}
-
-		private static void UdpListener_MessageReceived(object sender, Sockets.Plugin.Abstractions.UdpSocketMessageReceivedEventArgs e)
-		{
-			//read received message
-			string message = Encoding.UTF8.GetString(e.ByteData, 0, e.ByteData.Length);
-			MsgReceivedEventArgs temp = new MsgReceivedEventArgs(message);
-			MsgReceived?.Invoke(null, temp);
-		}
 
 
         //non-blocking
         public static async void SendBrdcstUDPAsync(string message)
         {
-            //IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, portNum);
             byte[] datagram = Encoding.UTF8.GetBytes(message);
-
-            await udpClient.SendToAsync(datagram, IPAddress.Broadcast.ToString(), portNum);
+            await udpClient.SendAsync(datagram, datagram.Length, IPAddress.Broadcast.ToString(), portNum);
         }
 
-        public async void SendMsgToPeerUDP(string message)
+
+        public async void SendMsgToPeerUDPAsync(string message)
         {
-            //IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, portNum);
             byte[] datagram = Encoding.UTF8.GetBytes(message);
-
-            await udpClient.SendToAsync(datagram, ipAddress, portNum);
+            await udpClient.SendAsync(datagram, datagram.Length, this.peerIpAddress, portNum);
         }
+
+        //non-blocking
+        private static async void StartListeningFromTCPAsync()
+        {
+            tcpListener.Start();
+            while (true)
+            {
+                TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
+            }
+
+            //new TcpClient, tell Basestation
+            //NewPeerEvent?.Invoke(null, new NewPeerEventArgs(tcpClient));
+        }
+
+
+        /*
 
 		public async void ConnectToClientTCP()
 		{
@@ -101,13 +103,6 @@ namespace Remote_Keyboard.Comms
 			// wait a little before sending the next chunck of data
 			await Task.Delay(TimeSpan.FromMilliseconds(500));
         }
-
-		//non-blocking
-		private static async void StartListeningForTCP()
-		{
-			tcpListener.ConnectionReceived += TcpIncomingMsg;
-			await tcpListener.StartListeningAsync(portNum);
-		}
 
 		private static void TcpIncomingMsg(object sender, TcpSocketListenerConnectEventArgs e)
 		{
@@ -130,5 +125,6 @@ namespace Remote_Keyboard.Comms
 			udpListener.StopListeningAsync();
 			tcpListener.StopListeningAsync();
 		}
+        */
     }
 }

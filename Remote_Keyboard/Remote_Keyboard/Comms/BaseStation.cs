@@ -57,7 +57,20 @@ namespace Remote_Keyboard.Comms
 
 
             PeerConnection.MsgReceived += PeerConnectionMsgReceived;
+            PeerConnection.NewPeerEvent += PeerConnection_NewPeerEvent;
             StartBroadcasting(timeIntrvlMilliSec);
+        }
+
+        private void PeerConnection_NewPeerEvent(object sender, NewPeerEventArgs e)
+        {
+            /*
+            TcpClient tcpClient = e.tcpClient;
+
+            Peer latestPeer = new Peer(hrtBtMsg, timeOutMilliSec, timerSync);
+            latestPeer.aliveTimeout.Elapsed += AliveTimeoutElapsed;
+
+            knownPeers.Add(latestPeer);
+            */
         }
 
         private void PeerConnectionMsgReceived(object sender, MsgReceivedEventArgs e)
@@ -114,9 +127,8 @@ namespace Remote_Keyboard.Comms
 
                 //some Android phones reject UDP broadcasts
                 //therefore message dirrectly so both peers know about each other
-                latestPeer.peerConnection.SendMsgToPeerUDP(this.brdcstMsg);
+                latestPeer.peerConnection.SendMsgToPeerUDPAsync(this.brdcstMsg);
 
-                //send out a broadcast to all subscribers
                 PeerChanged?.Invoke(this, new PeerUpdateEventArgs(knownPeers));
             }
         }
@@ -161,7 +173,7 @@ namespace Remote_Keyboard.Comms
         {
             foreach(Peer peer in knownPeers)
             {
-                peer.peerConnection.SendMsgToPeerTCP(message);         
+                //peer.peerConnection.SendMsgToPeerTCP(message);         
             }
         }
 
