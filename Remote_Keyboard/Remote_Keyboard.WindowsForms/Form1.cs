@@ -38,7 +38,7 @@ namespace Remote_Keyboard.WindowsForms
         {
             FileStream fileStream = new FileStream("KeyMapping.xml", FileMode.Open);
             EventManagerWin eventManager = new EventManagerWin(fileStream);
-            airKeyboard = new AirKeyboard(eventManager);
+            airKeyboard = new AirKeyboard(eventManager, this);
             airKeyboard.PeerChanged += AirKeyboard_PeerChanged;
             airKeyboard.KeyLogUpdate += AirKeyboard_KeyLogUpdate;
         }

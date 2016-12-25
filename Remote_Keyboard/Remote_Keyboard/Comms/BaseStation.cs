@@ -36,12 +36,14 @@ namespace Remote_Keyboard.Comms
         private List<Peer> knownPeers;
         private HeartBeat myHeartBeat;
 
+        private ISynchronizeInvoke timerSync;
+
         //peer change event
         public event EventHandler<PeerUpdateEventArgs> PeerChanged;
         public event EventHandler<KeyStrokeEventArgs> KeyStrokeReceived;
 
         //constructor
-        public BaseStation()
+        public BaseStation(ISynchronizeInvoke mTimerSync = null)
         {
             this.knownPeers = new List<Peer>();
             this.myHeartBeat = new HeartBeat
@@ -51,9 +53,10 @@ namespace Remote_Keyboard.Comms
                 acceptCopySync = true,
                 platform = OSValue.Windows10
             };
+            this.timerSync = mTimerSync;
 
 
-            PeerConnectionNew.MsgReceived += PeerConnectionMsgReceived;
+            PeerConnection.MsgReceived += PeerConnectionMsgReceived;
             StartBroadcasting(timeIntrvlMilliSec);
         }
 
@@ -92,7 +95,7 @@ namespace Remote_Keyboard.Comms
 
         private void BroadCastEvent(object sender, ElapsedEventArgs e)
         {
-            PeerConnectionNew.SendBrdcstUDPAsync(this.brdcstMsg);
+            PeerConnection.SendBrdcstUDPAsync(this.brdcstMsg);
         }
 
         private void ReceivedHeartBeat(HeartBeat hrtBtMsg)
@@ -104,8 +107,7 @@ namespace Remote_Keyboard.Comms
             if (!fromThisPeer && !fromExistingPeer)
             {
                 //establish TCP connection with that peer
-                Console.WriteLine("test");
-                Peer latestPeer = new Peer(hrtBtMsg, timeOutMilliSec);
+                Peer latestPeer = new Peer(hrtBtMsg, timeOutMilliSec, timerSync);
                 latestPeer.aliveTimeout.Elapsed += AliveTimeoutElapsed;
 
                 knownPeers.Add(latestPeer);

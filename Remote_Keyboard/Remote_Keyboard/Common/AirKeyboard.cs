@@ -3,25 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Remote_Keyboard.Comms;
+using System.ComponentModel;
 
 namespace Remote_Keyboard.Common
 {
     class AirKeyboard
     {
-        protected EventManager eventManager;
-        protected BaseStation baseStation;
+        private EventManager eventManager;
+        private BaseStation baseStation;
 
-        protected List<string> keysHeldDown;
+        private List<string> keysHeldDown;
 
         public event EventHandler<PeerUpdateEventArgs> PeerChanged;
         public event EventHandler<KeyLogUpdateEventArgs> KeyLogUpdate;
 
         //constructor
-        public AirKeyboard(EventManager evntManager)
+        public AirKeyboard(EventManager evntManager, ISynchronizeInvoke timerSync = null)
         {
             keysHeldDown = new List<string>();
             this.eventManager = evntManager;
-            this.baseStation = new BaseStation();
+            this.baseStation = new BaseStation(timerSync);
             baseStation.PeerChanged += BaseStationPeerChanged;
             baseStation.KeyStrokeReceived += BaseStationKeyStrokeReceived;
         }

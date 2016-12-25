@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 using System.Timers; //for client timeout
@@ -14,22 +15,23 @@ namespace Remote_Keyboard.Comms
         public Timer aliveTimeout;
 
         //every peer has its own connection
-        public PeerConnectionNew peerConnection;
+        public PeerConnection peerConnection;
 
         public bool activePeer = true;
 
         //constructor
-        public Peer( HeartBeat mLastHeartBeat, double timeOutTimeMillSec )
+        public Peer( HeartBeat mLastHeartBeat, double timeOutTimeMillSec, ISynchronizeInvoke timerSync = null )
         {
             this.lastHeartBeat = mLastHeartBeat;
 
             string peerIpAddress = mLastHeartBeat.senderIpAddress;
 
-            this.peerConnection = new PeerConnectionNew(peerIpAddress);
+            this.peerConnection = new PeerConnection(peerIpAddress);
 
             this.aliveTimeout = new Timer();
             this.aliveTimeout.AutoReset = false;
             this.aliveTimeout.Interval = timeOutTimeMillSec;
+            this.aliveTimeout.SynchronizingObject = timerSync;
             this.aliveTimeout.Start();
         }
     }
