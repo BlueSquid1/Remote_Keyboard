@@ -17,28 +17,53 @@ namespace Remote_Keyboard.Comms
         private static readonly int portNum = 8762;
         public string peerIpAddress { get; set; }
 
-        private static TcpListener tcpListener;
         private static UdpClient udpClient;
 
-        private TcpClient tcpClient;
+        private TcpListener tcpListener;
+        private TcpClient tcpClientRead;
+        private TcpClient tcpClientWrite;
+        private NetworkStream netStreamRead;
+        private NetworkStream netStreamWrite;
 
         //static constructor
         static PeerConnection()
         {
             //start the TCP and UDP servers
             udpClient = new UdpClient(portNum);
-            tcpListener = new TcpListener(IPAddress.Any, portNum);
 
             StartListeningFromUDPAsync();
-            StartListeningFromTCPAsync();
         }
 
         //constructor
         public PeerConnection(string ipAddress)
         {
             this.peerIpAddress = ipAddress;
-            tcpClient = new TcpClient(ipAddress, portNum);
-            Console.WriteLine("connected = " + tcpClient.Connected.ToString());
+            this.tcpClientWrite = new TcpClient();
+            this.tcpListener = new TcpListener(IPAddress.Any, portNum);
+
+            ListenForPeerTCP();
+            EstablishConnectionWithPeerTCP();
+            
+            //block until read and write stream are avaliable
+            while(netStreamWrite == null || netStreamRead == null)
+            {
+
+            }
+            StartListeningFromTCPAsync();
+        }
+
+        private async void ListenForPeerTCP()
+        {
+            tcpListener.Start();
+
+            this.tcpClientRead = await this.tcpListener.AcceptTcpClientAsync();
+            this.netStreamRead = this.tcpClientRead.GetStream();
+        }
+
+        private async void EstablishConnectionWithPeerTCP()
+        {
+            await this.tcpClientWrite.ConnectAsync(peerIpAddress, portNum);
+            this.netStreamWrite = tcpClientWrite.GetStream();
         }
 
         //non-blocking
@@ -71,26 +96,22 @@ namespace Remote_Keyboard.Comms
             await udpClient.SendAsync(datagram, datagram.Length, this.peerIpAddress, portNum);
         }
 
-        //non-blocking
-        private static async void StartListeningFromTCPAsync()
+        public async void SendMsgToPeerTCP(string message)
         {
-            tcpListener.Start();
-            while (true)
-            {
-                TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
-            }
-
-            //new TcpClient, tell Basestation
-            //NewPeerEvent?.Invoke(null, new NewPeerEventArgs(tcpClient));
+            Byte[] buffer = Encoding.UTF8.GetBytes(message);
+            netStreamWrite.Write(buffer, 0, buffer.Length);
+            await netStreamWrite.FlushAsync();
         }
 
+        private async void StartListeningFromTCPAsync()
+        {
+            Byte[] buffer = new Byte[1];
+            await netStreamRead.ReadAsync(buffer, 0, buffer.Length);
+            string msg = Encoding.UTF8.GetString(buffer);
+            Console.WriteLine(msg);
+        }
 
         /*
-
-		public async void ConnectToClientTCP()
-		{
-			await tcpClient.ConnectAsync(this.ipAddress, portNum);
-		}
 
         public async void SendMsgToPeerTCP(string message)
         {

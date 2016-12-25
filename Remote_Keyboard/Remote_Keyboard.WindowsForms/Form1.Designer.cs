@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.inputTab = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnDisplay = new System.Windows.Forms.Button();
             this.PeersTab = new System.Windows.Forms.TabPage();
             this.peerListView = new System.Windows.Forms.ListView();
             this.ipAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -49,7 +47,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.KeysPressed = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
-            this.inputTab.SuspendLayout();
             this.PeersTab.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SettingsTab.SuspendLayout();
@@ -69,8 +66,6 @@
             // 
             // inputTab
             // 
-            this.inputTab.Controls.Add(this.label1);
-            this.inputTab.Controls.Add(this.btnDisplay);
             this.inputTab.Location = new System.Drawing.Point(4, 22);
             this.inputTab.Name = "inputTab";
             this.inputTab.Padding = new System.Windows.Forms.Padding(3);
@@ -78,25 +73,6 @@
             this.inputTab.TabIndex = 0;
             this.inputTab.Text = "Input";
             this.inputTab.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 64);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // btnDisplay
-            // 
-            this.btnDisplay.Location = new System.Drawing.Point(245, 53);
-            this.btnDisplay.Name = "btnDisplay";
-            this.btnDisplay.Size = new System.Drawing.Size(75, 23);
-            this.btnDisplay.TabIndex = 0;
-            this.btnDisplay.Text = "Display";
-            this.btnDisplay.UseVisualStyleBackColor = true;
-            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
             // 
             // PeersTab
             // 
@@ -245,8 +221,6 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUpEvent);
             this.tabControl.ResumeLayout(false);
-            this.inputTab.ResumeLayout(false);
-            this.inputTab.PerformLayout();
             this.PeersTab.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -272,8 +246,6 @@
         private System.Windows.Forms.ColumnHeader status;
         private System.Windows.Forms.ImageList imgListOS;
         private System.Windows.Forms.ColumnHeader AcceptInput;
-        private System.Windows.Forms.Button btnDisplay;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox KeysPressed;
     }

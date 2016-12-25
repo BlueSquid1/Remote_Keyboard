@@ -173,7 +173,7 @@ namespace Remote_Keyboard.Comms
         {
             foreach(Peer peer in knownPeers)
             {
-                //peer.peerConnection.SendMsgToPeerTCP(message);         
+                peer.peerConnection.SendMsgToPeerTCP(message);         
             }
         }
 
