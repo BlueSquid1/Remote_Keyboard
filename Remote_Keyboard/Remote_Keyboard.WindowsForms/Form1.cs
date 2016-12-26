@@ -120,11 +120,16 @@ namespace Remote_Keyboard.WindowsForms
         private void KeyEvents(List<ushort> keyValue, bool isPressed)
         {
             bool keybroadLstn = chkBtnkeyboard.Checked;
-            string curTabName = tabControl.SelectedTab.Name;
-            if (keybroadLstn && curTabName == "inputTab")
+            if (keybroadLstn && isInputTab())
             {
                 airKeyboard.SendKeyList(keyValue, isPressed);
             }
+        }
+
+        private bool isInputTab()
+        {
+            string curTabName = tabControl.SelectedTab.Name;
+            return curTabName == "inputTab";
         }
 
         private ushort PreProcessKeyEventDown(KeyEventArgs e)
@@ -263,20 +268,23 @@ namespace Remote_Keyboard.WindowsForms
             return false;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+
+        protected override bool ProcessKeyPreview(ref Message m)
         {
-            switch(keyData)
+            Keys key = (Keys)m.WParam;
+
+            bool baseResult = base.ProcessKeyPreview(ref m);
+
+            if (key == Keys.Right && isInputTab())
             {
-                case Keys.Up:
-                case Keys.Down:
-                case Keys.Left:
-                case Keys.Right:
-                    Console.WriteLine("arrow keys");
-                    //return true prevents the arrow key from being pick 
-                    return true;
+                //tell windows that this event has already been handled
+                return true;
             }
-            return false;
+
+            return baseResult;
         }
+        
+        
 
     }
 }
