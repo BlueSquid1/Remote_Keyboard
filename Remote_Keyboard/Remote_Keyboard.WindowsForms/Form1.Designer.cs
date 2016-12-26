@@ -57,7 +57,9 @@
             this.tabControl.Controls.Add(this.inputTab);
             this.tabControl.Controls.Add(this.PeersTab);
             this.tabControl.Controls.Add(this.SettingsTab);
+            this.tabControl.ItemSize = new System.Drawing.Size(42, 18);
             this.tabControl.Location = new System.Drawing.Point(12, 56);
+            this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.ShowToolTips = true;

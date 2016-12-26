@@ -255,5 +255,28 @@ namespace Remote_Keyboard.WindowsForms
             // Release the graphics device context.
             g.Dispose();
         }
+
+        
+        protected override bool ProcessTabKey(bool forward)
+        {
+            //when this is false tab will trigger a key press event
+            return false;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch(keyData)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                    Console.WriteLine("arrow keys");
+                    //return true prevents the arrow key from being pick 
+                    return true;
+            }
+            return false;
+        }
+
     }
 }

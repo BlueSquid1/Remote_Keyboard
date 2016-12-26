@@ -41,6 +41,7 @@ namespace Remote_Keyboard.Comms
             this.tcpClientWrite = new TcpClient();
             this.tcpListener = new TcpListener(IPAddress.Any, portNum);
 
+            /*
             ListenForPeerTCP();
             EstablishConnectionWithPeerTCP();
             
@@ -50,6 +51,7 @@ namespace Remote_Keyboard.Comms
 
             }
             StartListeningFromTCPAsync();
+            */
         }
 
         private async void ListenForPeerTCP()
@@ -98,17 +100,25 @@ namespace Remote_Keyboard.Comms
 
         public async void SendMsgToPeerTCP(string message)
         {
+            /*
             Byte[] buffer = Encoding.UTF8.GetBytes(message);
             netStreamWrite.Write(buffer, 0, buffer.Length);
             await netStreamWrite.FlushAsync();
+            */
+
+            //TODO: use UDP for now. Will implement TCP later
+            byte[] datagram = Encoding.UTF8.GetBytes(message);
+            await udpClient.SendAsync(datagram, datagram.Length, this.peerIpAddress, portNum);
         }
 
         private async void StartListeningFromTCPAsync()
         {
+            /*
             Byte[] buffer = new Byte[1];
             await netStreamRead.ReadAsync(buffer, 0, buffer.Length);
             string msg = Encoding.UTF8.GetString(buffer);
             Console.WriteLine(msg);
+            */
         }
 
         /*
