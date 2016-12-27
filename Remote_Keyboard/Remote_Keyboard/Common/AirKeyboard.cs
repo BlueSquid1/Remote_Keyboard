@@ -67,6 +67,13 @@ namespace Remote_Keyboard.Common
             }
         }
 
+        /*
+        public void SendClipBoard(string clipboardMsg)
+        {
+
+        }
+        */
+
 
         private void LogKey(string sdlValue, bool isPressed)
         {

@@ -18,8 +18,10 @@ namespace Remote_Keyboard.WindowsForms
 {
     public partial class Form1 : Form
     {
+        //for distinguishing between left and right keys
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
+
 
         //because windows struggles to distinguish between left and right shift keys need to remember which is which for it
         private bool rightShiftDown = false;
@@ -28,9 +30,11 @@ namespace Remote_Keyboard.WindowsForms
         private bool leftControlDown = false;
 
         private AirKeyboard airKeyboard;
+        private ClipboardEventsWin clipboardEvent;
 
         public Form1()
         {
+            clipboardEvent = new ClipboardEventsWin(this);
             InitializeComponent();
         }
 
@@ -280,11 +284,21 @@ namespace Remote_Keyboard.WindowsForms
                 //tell windows that this event has already been handled
                 return true;
             }
-
             return baseResult;
         }
-        
-        
 
+        protected override void WndProc(ref Message m)
+        {
+            if(clipboardEvent == null)
+            {
+                base.WndProc(ref m);
+                return;
+            }
+            bool isHandledByClipboard = clipboardEvent.HandleWndProc(m);
+            if (!isHandledByClipboard)
+            {
+                base.WndProc(ref m);
+            }
+        }
     }
 }
