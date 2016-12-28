@@ -6,7 +6,7 @@ namespace Remote_Keyboard.Events
 {
     class KeyLogUpdateEventArgs : System.EventArgs
     {
-        public List<string> keysHeldDown { get; set; }
+        public List<string> keysHeldDown { get; }
 
         //constructor
         public KeyLogUpdateEventArgs( List<string> mKeysHeldDown)

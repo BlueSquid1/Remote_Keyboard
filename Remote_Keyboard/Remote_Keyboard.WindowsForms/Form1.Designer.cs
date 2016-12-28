@@ -219,7 +219,7 @@
             this.Controls.Add(this.tabControl);
             this.KeyPreview = true;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Air Keyboard";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUpEvent);

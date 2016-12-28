@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Remote_Keyboard.Events;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -8,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Remote_Keyboard.WindowsForms
 {
-    class ClipboardEventsWin
+    class ClipboardEventsWin : ClipboardEvents
     {
         //below three functions are for getting clipboard notifications
         [DllImport("User32.dll")]
@@ -31,7 +34,6 @@ namespace Remote_Keyboard.WindowsForms
         public ClipboardEventsWin(Form mWinForm)
         {
             this.winForm = mWinForm;
-
             nextClipboardViewer = (IntPtr)SetClipboardViewer((int)winForm.Handle);
         }
 
@@ -77,10 +79,35 @@ namespace Remote_Keyboard.WindowsForms
         //called automatically when the clipboard has been changed
         private void GetAndSendClipBoard()
         {
-            if(Clipboard.ContainsText())
+
+            if (Clipboard.ContainsFileDropList())
+            {
+                //Clipboard.Get
+                StringCollection filePaths = Clipboard.GetFileDropList();
+
+                //convert from stringcollection to list<string>
+                List<string> filePathList = new List<string>();
+                foreach(string filePath in filePaths)
+                {
+                    filePathList.Add(filePath);
+                }
+                OnFilesCopiedEvent(this, new FilesCopyEventArgs(filePathList));
+            }
+            if (Clipboard.ContainsText())
             {
                 string clipboardText = Clipboard.GetText();
-                Console.WriteLine(clipboardText);
+                OnTextCopiedEvent(this, new TextCopyEventArgs(clipboardText));
+            }
+
+            //Plaintext includes text, Unicode text, OEM (Object Exchange Model) text, and CSV (Comma-separated values)
+            if (Clipboard.ContainsData(DataFormats.UnicodeText.ToString()))
+            {
+                Console.WriteLine("unicode Text");
+            }
+
+            if (Clipboard.ContainsData(DataFormats.UnicodeText.ToString()))
+            {
+                Console.WriteLine("unicode Text");
             }
         }
     }
