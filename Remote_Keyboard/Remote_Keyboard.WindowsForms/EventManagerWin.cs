@@ -33,13 +33,12 @@ namespace Remote_Keyboard.WindowsForms
             ushort virtualKey = base.keyMapper.SdlToNativeKey(sdlKey);
             ushort scanCode = (ushort)MapVirtualKey(virtualKey, 0);
 
-            uint extendedFlag = 0x100;
-            bool isExtended = (scanCode & extendedFlag) != 0;
+            bool isExtended = IsExtended(sdlKey);
 
             uint tempflags = 0;
             if (isExtended)
             {
-                tempflags = 0x0001;
+                tempflags |= 0x0001;
             }
             if (!isPressed)
             {
@@ -65,6 +64,49 @@ namespace Remote_Keyboard.WindowsForms
             {
                 throw new Exception();
             }
+        }
+
+        private bool IsExtended(string sdlKey)
+        {
+            /*
+            taken from:
+            https://msdn.microsoft.com/en-us/library/windows/desktop/ms646267(v=vs.85).aspx
+
+            The extended-key flag indicates whether the keystroke message originated from one of the 
+            additional keys on the enhanced keyboard. The extended keys consist of the ALT and CTRL keys 
+            on the right-hand side of the keyboard; the INS, DEL, HOME, END, PAGE UP, PAGE DOWN, and 
+            arrow keys in the clusters to the left of the numeric keypad; the NUM LOCK key; the BREAK 
+            (CTRL+PAUSE) key; the PRINT SCRN key; and the divide (/) and ENTER keys in the numeric keypad. 
+            The extended-key flag is set if the key is an extended key.
+            */
+
+            string[] extendedKeysSDL = {
+                "Right Alt",
+                "Right Ctrl",
+                "Insert",
+                "Delete",
+                "Home",
+                "End",
+                "PageUp",
+                "PageDown",
+                "Up",
+                "Right",
+                "Left",
+                "Down",
+                "Numlock",
+                "PrintScreen",
+                "Keypad /",
+                "Keypad Enter"
+            };
+
+            foreach(string extKey in extendedKeysSDL)
+            {
+                if(extKey == sdlKey)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

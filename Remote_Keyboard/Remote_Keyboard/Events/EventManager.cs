@@ -16,10 +16,7 @@ namespace Remote_Keyboard.Events
             this.keyMapper = new NativeKeyMapper(keyStrokeFileStream, plateform);
         }
 
-        public virtual void TriggerKeyPress(string sdlKey, bool isPressed)
-        {
-            Console.WriteLine("parent");
-        }
+        public abstract void TriggerKeyPress(string sdlKey, bool isPressed);
 
 
         public string NativeKeyToSdl(ushort nativeKey)
