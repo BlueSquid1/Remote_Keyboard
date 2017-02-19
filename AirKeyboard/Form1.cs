@@ -86,6 +86,7 @@ namespace AirKeyboard
         //upboard down event
         private async void KeyDownEvent(object sender, KeyEventArgs e)
         {
+            e.Handled = true;
             ushort keyValue = proccInput.PreProcessKeyEventDown(e);
             List<ushort> keyValues = new List<ushort>();
             keyValues.Add(keyValue);
@@ -95,6 +96,7 @@ namespace AirKeyboard
 
         private async void KeyUpEvent(object sender, KeyEventArgs e)
         {
+            e.Handled = true;
             List<ushort> keyValues = proccInput.PreProcessKeyEventUp(e);
             await gameLoop.KeyUpEvent(keyValues);
 
@@ -124,6 +126,7 @@ namespace AirKeyboard
         }
 
 
+        /*
         protected override bool ProcessKeyPreview(ref Message m)
         {
             Keys key = (Keys)m.WParam;
@@ -138,6 +141,8 @@ namespace AirKeyboard
 
             return base.ProcessKeyPreview(ref m);
         }
+        */
+
 
         private async void btnConnect_Click(object sender, EventArgs e)
         {
