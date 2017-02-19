@@ -84,19 +84,19 @@ namespace AirKeyboard
 
 
         //upboard down event
-        private void KeyDownEvent(object sender, KeyEventArgs e)
+        private async void KeyDownEvent(object sender, KeyEventArgs e)
         {
             ushort keyValue = proccInput.PreProcessKeyEventDown(e);
             List<ushort> keyValues = new List<ushort>();
             keyValues.Add(keyValue);
-            gameLoop.KeyDownEvent(keyValues);
+            await gameLoop.KeyDownEvent(keyValues);
             UpdateKeysDisplay();
         }
 
-        private void KeyUpEvent(object sender, KeyEventArgs e)
+        private async void KeyUpEvent(object sender, KeyEventArgs e)
         {
             List<ushort> keyValues = proccInput.PreProcessKeyEventUp(e);
-            gameLoop.KeyUpEvent(keyValues);
+            await gameLoop.KeyUpEvent(keyValues);
 
             UpdateKeysDisplay();
         }

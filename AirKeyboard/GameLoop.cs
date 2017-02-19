@@ -31,12 +31,18 @@ namespace AirKeyboard
 
         private void StartGameLoopTimer()
         {
-            gameLoop.Tick += SendPressedKeys;
-            gameLoop.Interval = 20;
+            gameLoop.Tick += gameLoop_event;
+            gameLoop.Interval = 25;
             gameLoop.Start();
         }
 
-        private async void SendPressedKeys(object sender, EventArgs e)
+        private async void gameLoop_event(object sender, EventArgs e)
+        {
+            await SendPressedKeys();
+
+        }
+
+        private async Task SendPressedKeys()
         {
             List<ushort> keysPressedTemp = SentKeys;
 
@@ -105,7 +111,7 @@ namespace AirKeyboard
             return missingFromList2;
         }
 
-        public void KeyDownEvent(List<ushort> keyValues)
+        public async Task KeyDownEvent(List<ushort> keyValues)
         {
             foreach(ushort keyValue in keyValues)
             {
@@ -118,14 +124,16 @@ namespace AirKeyboard
                     }
                 }
             }
+            await SendPressedKeys();
         }
 
-        public void KeyUpEvent(List<ushort> keyValues)
+        public async Task KeyUpEvent(List<ushort> keyValues)
         {
             foreach(ushort keyValue in keyValues)
             {
                 SentKeys.Remove(keyValue);
             }
+            await SendPressedKeys();
         }
 
     }
