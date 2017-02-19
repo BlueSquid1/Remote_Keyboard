@@ -138,5 +138,18 @@ namespace AirKeyboard
 
             return base.ProcessKeyPreview(ref m);
         }
+
+        private async void btnConnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await objMgr.DirrectConnectAsyncTCP(txtIpAddress.Text);
+            }
+            catch
+            {
+                //failed to connect
+                MessageBox.Show("Failed to connect to peer: " + txtIpAddress.Text);
+            }
+        }
     }
 }
